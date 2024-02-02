@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="import_wizard_view_form" model="ir.ui.view">
+        <field name="name">ier.import.wizard.view.form</field>
+        <field name="model">ier.import.wizard</field>
+        <field name="arch" type="xml">
+            <form class="ier_import_wizard">
+                <div class="alert alert-success oe_edit_only" role="alert" invisible="success_html == False or success_html == ''">
+                    <field name="success_html" readonly="1"/>
+                </div>
+                <div class="alert alert-danger oe_edit_only" role="alert" invisible="error_html == False or error_html == ''">
+                    <field name="error_html" readonly="1"/>
+                </div>
+                <div class="alert alert-warning oe_edit_only" role="alert" invisible="warning_html == False or warning_html == ''">
+                    <field name="warning_html" readonly="1"/>
+                </div>
+                <sheet>
+                    <field name="is_importable" invisible="1"/>
+                    <group string="File" name="file">
+                        <field name="zip_file" filename="zip_file_name" widget="binary"/>
+                        <field name="zip_file_name" invisible="1"/>
+                        <field name="run_pre_process_code"/>
+                        <field name="run_post_process_code"/>
+                    </group>
+                    <group string="Archive Information" name="archive_info">
+                        <group>
+                            <field name="manifest_datetime"/>
+                            <field name="manifest_dbname"/>
+                            <label string="By User" for="manifest_username"/>
+                            <div name="manifest_username">
+                                <field class="oe_inline" name="manifest_username" nolabel="1"/>
+                                 <span invisible="manifest_userlogin == ''"> (</span><field class="oe_inline" name="manifest_userlogin" nolabel="1"/><span invisible="manifest_userlogin == ''">)</span>
+                            </div>
+                            <label string="For a total of" for="manifest_record_count"/>
+                            <div name="manifest_record_count">
+                                <field class="oe_inline" name="manifest_record_count" nolabel="1"/>
+                                <span invisible="manifest_record_count != 1"> record</span>
+                                <span invisible="manifest_record_count &lt;= 1"> records</span>
+                            </div>
+                        </group>
+                        <label for="manifest" class="text-900" string="Exports Template"/>
+                        <field name="manifest" widget="ier_manifest" nolabel="1" colspan="2"/>
+                        <label for="manifest_pre_process_code" class="text-900" string="Pre Process Code"/>
+                        <field name="manifest_pre_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                        <label for="manifest_post_process_code" class="text-900" string="Post Process Code"/>
+                        <field name="manifest_post_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                    </group>
+                    <footer>
+                        <button name="import_action" type="object" string="Import" class="oe_highlight" invisible="is_importable == False"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="import_records_wizard_action" model="ir.actions.act_window">
+        <field name="name">Import Records</field>
+        <field name="res_model">ier.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="web_widget_image_field.Many2OneImageField" owl="1">
+        <div class="d-flex" t-att-data-tooltip="props.value[1]">
+            <span class="o_m2o_avatar">
+                <span t-if="props.value === false and !props.readonly" class="o_m2o_avatar_empty"></span>
+                <img t-if="props.value !== false" t-attf-src="/web/image/{{relation}}/{{props.value[0]}}/{{imageSize}}" />
+            </span>
+            <Many2OneField t-props="props" canOpen="!props.readonly"/>
+        </div>
+    </t>
+
+</templates>

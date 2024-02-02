@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+
+    <t t-name="ier_manifest" owl="1">
+        <div class="ier_manifest_widget" t-if="manifest">
+            <table>
+                <tr>
+                    <th>Export Name</th>
+                    <th>Model Name</th>
+                    <th>Fields</th>
+                </tr>
+                <tr t-foreach="manifest.ir_exports" t-as="export" t-key="export_index">
+                    <td><t t-esc="export.name"/></td>
+                    <td><t t-esc="export.model_name"/></td>
+                    <td>
+                        <t t-foreach="export.fields" t-as="field" t-key="field_index">
+                            <span class="badge ier_badge"><t t-esc="field"/></span>
+                        </t>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </t>
+
+</template>

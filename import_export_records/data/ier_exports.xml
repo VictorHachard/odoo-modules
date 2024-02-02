@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_exports_ir_exports_ier" model="ir.exports">
+            <field name="name">ir_exports_ier</field>
+            <field name="resource">ir.exports</field>
+            <field name="export_fields" eval="[
+            (0, 0, {'name': 'id'}),
+            (0, 0, {'name': 'name'}),
+            (0, 0, {'name': 'resource'}),
+            (0, 0, {'name': 'export_fields/id'}),
+            (0, 0, {'name': 'export_fields/name'}),
+            ]"/>
+        </record>
+
+        <record id="ir_exports_exports_ier" model="ir.exports">
+            <field name="name">exports_ier</field>
+            <field name="resource">ier.template</field>
+            <field name="export_fields" eval="[
+            (0, 0, {'name': 'id'}),
+            (0, 0, {'name': 'name'}),
+            (0, 0, {'name': 'description'}),
+            (0, 0, {'name': 'active'}),
+            (0, 0, {'name': 'post_process_code'}),
+            (0, 0, {'name': 'lines/id'}),
+            (0, 0, {'name': 'lines/sequence'}),
+            (0, 0, {'name': 'lines/ir_exports_id/id'}),
+            (0, 0, {'name': 'lines/active'}),
+            (0, 0, {'name': 'lines/mode'}),
+            (0, 0, {'name': 'lines/filter_domain'}),
+            (0, 0, {'name': 'lines/code'}),
+            ]"/>
+        </record>
+
+        <record id="ier_exports_ier" model="ier.template" context="{'bypass_import_compat_constrain': True}">
+            <field name="name">IER Template</field>
+            <field name="description">Template for exporting all other templates.</field>
+            <field name="lines" eval="[
+            (0, 0, {
+                'sequence': 1,
+                'ir_exports_id': ref('import_export_records.ir_exports_ir_exports_ier'),
+                'mode': 'advanced',
+                'code': 'templates = env[\'ier.template\'].search([(\'id\', \'!=\', 1)])\naction = {\'records\': templates.lines.ir_exports_id.ids}',
+            }),
+            (0, 0, {
+                'sequence': 2,
+                'ir_exports_id': ref('import_export_records.ir_exports_exports_ier'),
+                'mode': 'easy',
+                'filter_domain': '[\'&amp;\', \'|\', (\'active\', \'=\', False), (\'active\', \'=\', True), (\'id\', \'!=\', 1)]',
+            }),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>
