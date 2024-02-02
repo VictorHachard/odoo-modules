@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ier_template,ier_template,model_ier_template,base.group_system,1,1,1,1
+access_ier_template_line,ier_template_line,model_ier_template_line,base.group_system,1,1,1,1
+access_ier_template_action_history,ier_template_action_history,model_ier_template_action_history,base.group_system,1,0,1,0
+access_ier_export_wizard,ier_export_wizard,model_ier_export_wizard,base.group_system,1,1,1,1
+access_ier_import_wizard,ier_import_wizard,model_ier_import_wizard,base.group_system,1,1,1,1

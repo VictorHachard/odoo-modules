@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="group_custom_search" model="res.groups">
+            <field name="name">Enable Custom Search</field>
+        </record>
+
+        <record id="group_custom_favorite_share" model="res.groups">
+            <field name="name">Enable Custom Favorite Share</field>
+        </record>
+
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id" eval="[
+                Command.link(ref('group_custom_search')),
+                Command.link(ref('group_custom_favorite_share'))
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

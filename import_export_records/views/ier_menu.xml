@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem name="Import/Export"
+              id="menu_root_import_export_records"
+              web_icon="import_export_records,static/description/icon.png"
+              groups="base.group_user"
+              sequence="1000">
+    </menuitem>
+    <menuitem id="menu_action_template" parent="menu_root_import_export_records" action="import_export_records.ier_template_action"/>
+    <menuitem id="menu_action_import" parent="menu_root_import_export_records" action="import_export_records.export_records_wizard_action"/>
+    <menuitem id="menu_action_export" parent="menu_root_import_export_records" action="import_export_records.import_records_wizard_action"/>
+    <menuitem id="menu_action_history" parent="menu_root_import_export_records" action="import_export_records.ier_template_action_history_action"/>
+
+</odoo>

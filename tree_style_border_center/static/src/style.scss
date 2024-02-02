@@ -1,0 +1,32 @@
+.o_list_renderer .o_list_table {
+    th {
+        text-align: center !important;
+        border-left: 1px solid rgb(222, 226, 230) !important;
+        border-right: 1px solid rgb(222, 226, 230) !important;
+    }
+    th:last-child {
+        border-right: none !important;
+    }
+    th:first-child {
+        border-left: none !important;
+    }
+    thead .o_list_number_th {
+        text-align: center !important;
+    }
+    tr.o_data_row td {
+        border-left: 1px solid rgb(222, 226, 230);
+        border-right: 1px solid rgb(222, 226, 230);
+    }
+    tr {
+        td:last-child {
+            border-right: none !important;
+        }
+        td:first-child {
+            border-left: none !important;
+        }
+    }
+}
+
+.o_notebook_headers .nav-tabs .nav-link.active {
+    border-bottom: 1px solid rgb(222, 226, 230) !important;
+}

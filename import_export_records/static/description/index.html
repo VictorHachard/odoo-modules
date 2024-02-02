@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <br>
+        <p>
+            This module simplifies the process of exporting multiple records from various models by offering a versatile template-based approach.
+            Users can create export templates and apply filters based on specific domains, making record management more efficient and tailored to your needs.
+        </p>
+
+        <h4>Define Odoo export data template:</h4>
+        <p>First, you need to define the export template. You can do on any menu with the default Odoo export data.</p>
+        <p>The export template must be a <b>import-compatible export</b> and should not contain fields nested more than two levels deep.</p>
+        <div class="my-2">
+            <img src="print_ir_export.png" alt="Export View Screenshot" style="width: 100%;">
+        </div>
+
+        <h4>Create IER template:</h4>
+        <p>Once the export template is defined, you can create the IER template.</p>
+        <div class="my-2">
+            <img src="print_ier_template.png" alt="IER Template View Screenshot" style="width: 100%;">
+        </div>
+
+        <h4>Add line in the IER template:</h4>
+        <p>Once the IER template is created, you can add lines to it.</p>
+        <p>Each line represents a record to export.</p>
+        <p>You can add a domain to the line to export only the records that match the domain. The domain can be a user domain or python code.</p>
+        <p>The order of the line is important. If one line depends on another, make sure to place the dependent line above the one it relies on.</p>
+        <div class="my-2">
+            <img src="print_ier_export_line_filter.png" alt="Filter View Screenshot" style="width: 100%;">
+        </div>
+
+        <div style="my-2">
+            <img src="print_ier_export_line_code.png" alt="Code View Screenshot" style="width: 100%;">
+        </div>
+
+        <h4>Export:</h4>
+        <p>Once the template is created, you can export the records by clicking on the "Export" button.</p>
+        <p>All the records will be bundled into a zip file that you can later import.</p>
+
+        <h4>Import:</h4>
+        <p>Once the zip file is created, you can import it by clicking on the "Import" button.</p>
+        <p>The import will create the records in the database. If the record already exists, it will be updated.</p>
+        <div style="my-2">
+            <img src="print_ier_import.png" alt="Import View Screenshot" style="width: 100%;">
+        </div>
+
+        <br>
+
+        <h4>Contributing:</h4>
+        <p>If you're interested in contributing, please visit the <a href="https://github.com/VictorHachard/import_export_records" target="_blank">GitHub repository</a> @ github.com/VictorHachard/import_export_records</p>
+
+        <h4>Issue:</h4>
+        <p>If you encounter any issues, please visit the <a href="https://github.com/VictorHachard/import_export_records/issues" target="_blank">GitHub repository issue section</a> @ github.com/VictorHachard/import_export_records/issues</p>
+
+    </body>
+</html>

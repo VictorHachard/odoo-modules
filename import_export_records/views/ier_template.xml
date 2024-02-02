@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ier_template_view_form" model="ir.ui.view">
+        <field name="name">ier.template.view.form</field>
+        <field name="model">ier.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="export" string="Export" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_history" type="object" class="oe_stat_button" icon="fa-history"
+                                invisible="ier_template_action_history_count == 0">
+                            <field name="ier_template_action_history_count" widget="statinfo" string="History"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Sale Order"/></h1>
+                    </div>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Add a description..." nolabel="1" colspan="2"/>
+                        </page>
+                        <page string="Template Line" name="lines" autofocus="autofocus">
+                            <field name="lines" mode="tree,form">
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="ir_exports_id" context="{'show_model': True}" options="{'no_open': True, 'no_create': True, 'no_edit': True}"/>
+                                            <field name="active"/>
+                                            <field name="mode" widget="radio" options="{'horizontal': true}"/>
+                                        </group>
+                                        <group>
+                                            <field name="model_id"/>
+                                            <field name="model_name"/>
+                                            <field name="line_ids" widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                    <group string="Filter" name='filter' invisible="mode == 'advanced'">
+                                        <field name="filter_domain" widget="domain" options="{'model': 'model_name', 'in_dialog': True}"/>
+                                    </group>
+                                    <group string="Python Code" name='code' invisible="mode == 'easy'">
+                                        <field name="code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                                    </group>
+                                </form>
+                                <tree decoration-muted="(not active)">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="active"/>
+                                    <field name="ir_exports_id"/>
+                                    <field name="model_id"/>
+                                    <field name="model_name"/>
+                                    <field name="mode"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pre Process Code" name="pre_process">
+                            <field name="pre_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                        </page>
+                        <page string="Post Process Code" name="post_process">
+                            <field name="post_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                        </page>
+                        <page string="Other Info" name="other_info">
+                            <group>
+                                <field name="active"/>
+                                <field name="user_id" widget="many2one_avatar"/>
+                            </group>
+                        </page>
+                        <page string="Help" name="help">
+                            <ul>
+                                <li>
+                                    The export template must be a <b>import-compatible export</b> and should not contain fields nested more than two levels deep.
+                                </li>
+                                <li>
+                                    The order of the line is important. If one line depends on another, make sure to place the dependent line above the one it relies on.
+                                </li>
+                                <li>
+                                    Only active lines will be included in the export.
+                                </li>
+                                <li>
+                                    The post-processing code will execute once all records have been imported. You can choose whether it needs to run during the import process.
+                                </li>
+                            </ul>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ier_template_view_tree" model="ir.ui.view">
+        <field name="name">ier.template.view.tree</field>
+        <field name="model">ier.template</field>
+        <field name="arch" type="xml">
+            <tree js_class="ier_list_btn" class="ier_template_tree" decoration-muted="(not active)">
+                <field name="active" column_invisible="1"/>
+
+                <field name="display_name" string="Name"/>
+                <field name="description" widget="char" class="text-truncate"/>
+                <field name="lines" widget="many2many_tags"/>
+                <field name="model_ids" widget="many2many_tags" optional="show"/>
+                <field name="user_id" widget="many2one_avatar" optional="show"/>
+                <button name="export" icon="fa-download" string="Export" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ier_template_view_search" model="ir.ui.view">
+        <field name="name">ier.template.view.search</field>
+        <field name="model">ier.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <separator/>
+                <filter string="All" name="all" domain="['|', ('active', '=', False), ('active', '=', True)]" />
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="User" name="user" domain="[]" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ier_template_action" model="ir.actions.act_window">
+        <field name="name">Templates</field>
+        <field name="res_model">ier.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_all': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No template found!</p>
+            <p>Create a new template to export records.</p>
+        </field>
+    </record>
+
+</odoo>
