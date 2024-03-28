@@ -5,7 +5,7 @@
     'description': "This module add border and center text in tree view",
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'author': "Victor",
     'license': 'LGPL-3',
     'price': 0,
@@ -19,5 +19,4 @@
     },
     'installable': True,
     'application': False,
-    'auto_install': True,
 }
