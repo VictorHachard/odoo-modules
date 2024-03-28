@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@name='address_not_same_as_shipping']//div[@t-if='o.partner_id.vat']" position="after">
+                <div t-if="o.partner_id.siret and o.partner_id.country_code == 'FR' and o.company_id.country_code == 'FR'">
+                    <t>SIRET: <span t-field="o.partner_id.siret"/></t>
+                </div>
+            </xpath>
+             <xpath expr="//div[@name='address_same_as_shipping']//div[@t-if='o.partner_id.vat']" position="after">
+                <div t-if="o.partner_id.siret and o.partner_id.country_code == 'FR' and o.company_id.country_code == 'FR'">
+                    <t>SIRET: <span t-field="o.partner_id.siret"/></t>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>
