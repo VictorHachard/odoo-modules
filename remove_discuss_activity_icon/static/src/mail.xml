@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.ActivityMenu" t-inherit-mode="extension">
+        <xpath expr="//Dropdown" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="mail.MessagingMenu" t-inherit-mode="extension">
+        <xpath expr="//Dropdown" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+         <xpath expr="//t[@t-else='']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+    </t>
+
+</templates>
