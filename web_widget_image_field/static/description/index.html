@@ -3,14 +3,14 @@
     <body>
         <br>
         <p>
-            This module add a new widget to add an image on the right of a relation field. It like the many2one_avatar widget but for all relation field.
-            In the relation field, you must inherit the 'image.mixin' model.
+            This module add a new widget to add an image on the left of a relation field. It like the many2one_avatar widget.
+            When adding the widget to a field, you can specify the image field to use (default is image_128).
         </p>
 
         <h4>Example:</h4>
 
         <pre>
-&lt;field name="track_id" widget="many2one_image" options="{'size': 'image_256'}"/&gt;
+&lt;field name="track_id" widget="many2one_image" options="{'image_field': 'image_256'}"/&gt;
         </pre>
 
         <div class="my-2">

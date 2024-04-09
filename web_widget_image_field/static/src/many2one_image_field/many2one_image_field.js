@@ -1,19 +1,14 @@
 /* @odoo-module */
 
 import { Component } from "@odoo/owl";
-
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
-import { usePopover } from "@web/core/popover/popover_hook";
 import { many2OneField, Many2OneField } from "@web/views/fields/many2one/many2one_field";
 
 // Base
 export class Many2OneImageField extends Component {
     get relation() {
         return this.props.relation;
-    }
-    get imageSize() {
-        return this.props.size || 'image_128';
     }
 }
 
@@ -25,11 +20,11 @@ Many2OneImageField.components = {
 };
 Many2OneImageField.props = {
     ...Many2OneField.props,
-    size: { type: String, optional: true },
+    imageField: { type: String, optional: true },
 };
 Many2OneImageField.extractProps = ({ attrs }) => {
     return {
-        size: attrs.options.size,
+        ImageSize: attrs.options.image_field || "image_128",
     };
 };
 
