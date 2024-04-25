@@ -6,13 +6,13 @@
         <field name="model">ier.import.wizard</field>
         <field name="arch" type="xml">
             <form class="ier_import_wizard">
-                <div class="alert alert-success oe_edit_only" role="alert" invisible="success_html == False or success_html == ''">
+                <div class="alert alert-success oe_edit_only" role="alert" attrs="{'invisible': ['|', ('success_html', '=', False), ('success_html', '=', '')]}">
                     <field name="success_html" readonly="1"/>
                 </div>
-                <div class="alert alert-danger oe_edit_only" role="alert" invisible="error_html == False or error_html == ''">
+                <div class="alert alert-danger oe_edit_only" role="alert" attrs="{'invisible': ['|', ('error_html', '=', False), ('error_html', '=', '')]}">
                     <field name="error_html" readonly="1"/>
                 </div>
-                <div class="alert alert-warning oe_edit_only" role="alert" invisible="warning_html == False or warning_html == ''">
+                <div class="alert alert-warning oe_edit_only" role="alert" attrs="{'invisible': ['|', ('warning_html', '=', False), ('warning_html', '=', '')]}">
                     <field name="warning_html" readonly="1"/>
                 </div>
                 <sheet>
@@ -30,13 +30,13 @@
                             <label string="By User" for="manifest_username"/>
                             <div name="manifest_username">
                                 <field class="oe_inline" name="manifest_username" nolabel="1"/>
-                                 <span invisible="manifest_userlogin == ''"> (</span><field class="oe_inline" name="manifest_userlogin" nolabel="1"/><span invisible="manifest_userlogin == ''">)</span>
+                                <span attrs="{'invisible': [('manifest_userlogin', '=', '')]}"> (</span><field class="oe_inline" name="manifest_userlogin" nolabel="1"/><span attrs="{'invisible': [('manifest_userlogin', '=', '')]}">)</span>
                             </div>
                             <label string="For a total of" for="manifest_record_count"/>
                             <div name="manifest_record_count">
                                 <field class="oe_inline" name="manifest_record_count" nolabel="1"/>
-                                <span invisible="manifest_record_count != 1"> record</span>
-                                <span invisible="manifest_record_count &lt;= 1"> records</span>
+                                <span attrs="{'invisible': [('manifest_record_count', '!=', 1)]}"> record</span>
+                                <span attrs="{'invisible': [('manifest_record_count', '&lt;=', 1)]}"> records</span>
                             </div>
                         </group>
                         <label for="manifest" class="text-900" string="Exports Template"/>
@@ -47,7 +47,7 @@
                         <field name="manifest_post_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
                     </group>
                     <footer>
-                        <button name="import_action" type="object" string="Import" class="oe_highlight" invisible="is_importable == False"/>
+                        <button name="import_action" type="object" string="Import" class="oe_highlight" attrs="{'invisible': [('is_importable', '=', False)]}"/>
                         <button special="cancel" string="Cancel"/>
                     </footer>
                 </sheet>

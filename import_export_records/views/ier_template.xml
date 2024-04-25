@@ -12,7 +12,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="open_history" type="object" class="oe_stat_button" icon="fa-history"
-                                invisible="ier_template_action_history_count == 0">
+                                attrs="{'invisible': [('ier_template_action_history_count', '=', 0)]}">
                             <field name="ier_template_action_history_count" widget="statinfo" string="History"/>
                         </button>
                     </div>
@@ -38,10 +38,10 @@
                                             <field name="line_ids" widget="many2many_tags"/>
                                         </group>
                                     </group>
-                                    <group string="Filter" name='filter' invisible="mode == 'advanced'">
+                                    <group string="Filter" name='filter' attrs="{'invisible': [('mode', '=', 'advanced')]}">
                                         <field name="filter_domain" widget="domain" options="{'model': 'model_name', 'in_dialog': True}"/>
                                     </group>
-                                    <group string="Python Code" name='code' invisible="mode == 'easy'">
+                                    <group string="Python Code" name='code' attrs="{'invisible': [('mode', '=', 'easy')]}">
                                         <field name="code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
                                     </group>
                                 </form>
@@ -94,7 +94,7 @@
         <field name="model">ier.template</field>
         <field name="arch" type="xml">
             <tree js_class="ier_list_btn" class="ier_template_tree" decoration-muted="(not active)">
-                <field name="active" column_invisible="1"/>
+                <field name="active" invisible="1"/>
 
                 <field name="display_name" string="Name"/>
                 <field name="description" widget="char" class="text-truncate"/>

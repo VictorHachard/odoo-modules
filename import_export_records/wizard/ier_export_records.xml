@@ -11,7 +11,7 @@
                     <field name="line_ids" widget="many2many_tags"/>
                 </group>
                 <footer>
-                    <button name="export_action" type="object" string="Export" class="oe_highlight" invisble="template_id == False"/>
+                    <button name="export_action" type="object" string="Export" class="oe_highlight" attrs="{'invisible': [('template_id', '=', False)]}"/>
                     <button special="cancel" string="Cancel"/>
                 </footer>
             </form>

@@ -8,7 +8,7 @@ This module simplifies the process of exporting multiple records from various mo
 Users can create export templates and apply filters based on specific domains, making record management more efficient and tailored to your needs.
 """,
     'category': 'Technical',
-    'version': '1.4.0',
+    'version': '1.4.1',
     'author': "Victor",
     'license': 'LGPL-3',
     'depends': ['base', 'web'],
