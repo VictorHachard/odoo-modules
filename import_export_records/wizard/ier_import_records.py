@@ -22,8 +22,8 @@ class IERImportWizard(models.TransientModel):
     _name = 'ier.import.wizard'
     _description = 'IER Import Wizard'
 
-    zip_file = fields.Binary(string='Upload your File', required=True)
-    zip_file_name = fields.Char("File Name")
+    zip_file = fields.Binary(string='Upload your File', required=True, attachment=False)
+    zip_file_name = fields.Char("File Name", required=True)
 
     run_post_process_code = fields.Boolean(default=True, help="Run the post process code after import")
     run_pre_process_code = fields.Boolean(default=True, help="Run the pre process code before import")
@@ -74,18 +74,19 @@ class IERImportWizard(models.TransientModel):
     @api.depends('zip_file')
     def _compute_manifest_data(self):
         for rec in self:
-            rec.update({
-                'manifest_datetime': False,
-                'manifest_dbname': '',
-                'manifest_username': '',
-                'manifest_userlogin': '',
-                'manifest_record_count': 0,
-                'manifest_post_process_code': '',
-                'manifest_pre_process_code': '',
-                'is_importable': False,
-                'manifest': '',
-            })
-            if rec.zip_file:
+            if (rec.zip_file and isinstance(rec.zip_file, bytes)) or not rec.zip_file:
+                rec.update({
+                    'manifest_datetime': False,
+                    'manifest_dbname': '',
+                    'manifest_username': '',
+                    'manifest_userlogin': '',
+                    'manifest_record_count': 0,
+                    'manifest_post_process_code': '',
+                    'manifest_pre_process_code': '',
+                    'is_importable': False,
+                    'manifest': '',
+                })
+            if rec.zip_file and isinstance(rec.zip_file, bytes):
                 decoded_zip = base64.b64decode(rec.zip_file)
                 io_bytes_zip = io.BytesIO(decoded_zip)
 
@@ -118,6 +119,8 @@ class IERImportWizard(models.TransientModel):
             records_by_model = {}
             decoded_zip = base64.b64decode(self.zip_file)
             io_bytes_zip = io.BytesIO(decoded_zip)
+
+            self._compute_manifest_data()
 
             if self.run_pre_process_code:
                 self._run_pre_process_code()
@@ -173,7 +176,6 @@ class IERImportWizard(models.TransientModel):
             # orm
             'env': self.env,
             # Exceptions
-            'Warning': odoo.exceptions.Warning,
             'UserError': odoo.exceptions.UserError,
         }
 

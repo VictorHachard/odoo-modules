@@ -18,7 +18,7 @@
                 <sheet>
                     <field name="is_importable" invisible="1"/>
                     <group string="File" name="file">
-                        <field name="zip_file" filename="zip_file_name" widget="binary"/>
+                        <field name="zip_file" filename="zip_file_name" options="{'accepted_file_extensions': '.zip'}"/>
                         <field name="zip_file_name" invisible="1"/>
                         <field name="run_pre_process_code"/>
                         <field name="run_post_process_code"/>
