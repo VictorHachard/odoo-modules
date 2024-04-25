@@ -11,16 +11,16 @@ export class IERListBtnController extends ListController {
    }
 
    OnImportClick() {
-//       this.actionService.doAction({
-//          type: 'ir.actions.act_window',
-//          res_model: 'ier.import.wizard',
-//          name: _lt('Import Records'),
-//          view_mode: 'form',
-//          view_type: 'form',
-//          views: [[false, 'form']],
-//          target: 'new',
-//          res_id: false,
-//      });
+       this.actionService.doAction({
+          type: 'ir.actions.act_window',
+          res_model: 'ier.import.wizard',
+          name: _lt('Import Records'),
+          view_mode: 'form',
+          view_type: 'form',
+          views: [[false, 'form']],
+          target: 'new',
+          res_id: false,
+      });
    }
 }
 

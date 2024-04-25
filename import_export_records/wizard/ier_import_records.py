@@ -48,7 +48,7 @@ class IERImportWizard(models.TransientModel):
             "type": "ir.actions.act_window",
             "res_model": self._name,
             "res_id": self.id,
-            "name": self._description,
+            "name": _(self._description),
             "view_mode": "form",
             "target": "new",
         }

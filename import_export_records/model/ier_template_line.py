@@ -184,7 +184,6 @@ class IERTemplateLine(models.Model):
             'env': self.env,
             'model': self.env[self.model_name],
             # Exceptions
-            'Warning': odoo.exceptions.Warning,
             'UserError': odoo.exceptions.UserError,
             # record
             'records': self.env[self.model_name].search([]),

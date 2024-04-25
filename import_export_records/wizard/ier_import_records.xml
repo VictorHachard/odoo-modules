@@ -39,12 +39,12 @@
                                 <span invisible="manifest_record_count &lt;= 1"> records</span>
                             </div>
                         </group>
-                        <label for="manifest" class="text-900" string="Exports Template"/>
-                        <field name="manifest" widget="ier_manifest" nolabel="1" colspan="2"/>
+<!--                        <label for="manifest" class="text-900" string="Exports Template"/>-->
+<!--                        <field name="manifest" widget="ier_manifest" nolabel="1" colspan="2"/>-->
                         <label for="manifest_pre_process_code" class="text-900" string="Pre Process Code"/>
-                        <field name="manifest_pre_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                        <field name="manifest_pre_process_code" widget="code" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
                         <label for="manifest_post_process_code" class="text-900" string="Post Process Code"/>
-                        <field name="manifest_post_process_code" widget="ace" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
+                        <field name="manifest_post_process_code" widget="code" options="{'mode': 'python'}" nolabel="1" colspan="2"/>
                     </group>
                     <footer>
                         <button name="import_action" type="object" string="Import" class="oe_highlight" invisible="is_importable == False"/>
