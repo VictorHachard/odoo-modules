@@ -1,4 +1,4 @@
-odoo.define("web.web_widget_mermaid", function (require) {
+odoo.define("web_widget_mermaid_field.web_widget_mermaid_field", function (require) {
     "use strict";
 
     var basic_fields = require("web.basic_fields");
