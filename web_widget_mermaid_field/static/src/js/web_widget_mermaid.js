@@ -20,14 +20,24 @@ odoo.define("web_widget_mermaid_field.web_widget_mermaid_field", function (requi
             if (!this.value) {
                 return;
             }
-            var config = _.extend({}, defaultConfig, this.attrs.options);
+            const { mermaid_scroll_x, division_ration, ...mermaidConfig } = this.attrs.options;
+            var config = _.extend({}, defaultConfig, mermaidConfig);
             mermaid.initialize(config);
+            let style = '';
+            let subStyle = '';
+            if (mermaid_scroll_x) {
+                style += 'overflow-x: auto;';
+            }
             (async () => {
                 try {
                     this.$el.html($("<div/>", { id: this.chartId }));
                     const { svg, bindFunctions } = await mermaid.render(this.chartId, this.value);
-                    //const maxWidth = parseFloat($(svg).css("max-width")) / 1.5;
-                    //this.$el.find("#" + this.chartId).css("width", maxWidth);
+                    let maxWidth = parseFloat($(svg).css("max-width"));
+                    if (maxWidth) {
+                        const ratio = parseFloat(division_ration);
+                        maxWidth = maxWidth / ratio;
+                    }
+                    this.$el.find("#" + this.chartId).css("width", maxWidth);
                     this.$el.find("#" + this.chartId).html(svg);
                 } catch (e) {
                     this.$el.html($("<pre/>").text(e.message || e.str));
