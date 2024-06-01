@@ -2,8 +2,14 @@
 <templates xml:space="preserve">
 
     <t t-name="web_widget_mermaid_field.MermaidField" owl="1">
-        <div t-attf-id="{{ chartId }}" class="o_form_field_mermaid">
-            <t t-out="mermaidSvg"/>
+        <div t-attf-style="{{ style }}">
+            <div
+                    t-attf-id="{{ chartId }}"
+                    t-attf-style="{{ subStyle }}"
+                    class="o_form_field_mermaid"
+                    t-out="mermaidSvg"
+            >
+            </div>
         </div>
     </t>
 
