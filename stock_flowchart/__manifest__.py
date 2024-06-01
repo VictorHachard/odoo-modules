@@ -3,7 +3,7 @@
     "name": "Stock Flowchart",
     "summary": "Technical module that adds a generic flowchart to stock for use by other modules.",
     "description": "Technical module that adds a generic flowchart to stock for use by other modules.",
-    "category": "Technical",
+    "category": "Hidden
     "version": "0.0.1",
     "license": "AGPL-3",
     "author": "Victor",
