@@ -16,16 +16,28 @@ export class MermaidField extends TextField {
     setup() {
         super.setup();
         this.chartId = uniqueId("mermaid_chart_");
+        const { mermaid_scroll_x, division_ration, ...mermaidConfig } = this.props.mermaidConfig;
         this.config = Object.assign({}, {
             logLevel: "fatal",
             securityLevel: "strict",
             startOnLoad: false,
-        }, this.props.mermaidConfig);
+        }, mermaidConfig);
+        this.style = '';
+        this.subStyle = '';
+        if (mermaid_scroll_x) {
+            this.style += 'overflow-x: auto;';
+        }
         this.mermaidSvg = "";
         onWillStart(async () => {
             if (this.props.record.data[this.props.name]) {
                 try {
                     const { svg } = await mermaid.render(this.chartId, this.props.record.data[this.props.name]);
+                    let maxWidth = parseFloat($(svg).css("max-width"));
+                    if (division_ration) {
+                        const ratio = parseFloat(division_ration);
+                        maxWidth = maxWidth / ratio;
+                    }
+                    this.subStyle = `width: ${maxWidth}px;`;
                     this.mermaidSvg = markup(svg);
                 } catch (e) {
                     this.mermaidSvg = `<pre>${e.message || e.str}</pre>`;
