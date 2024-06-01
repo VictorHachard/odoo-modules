@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
-    <t t-name="web_widget_mermaid.MermaidField">
+    <t t-name="web_widget_mermaid_field.MermaidField">
         <div t-attf-id="{{ chartId }}" class="o_form_field_mermaid">
             <t t-out="mermaidSvg"/>
         </div>

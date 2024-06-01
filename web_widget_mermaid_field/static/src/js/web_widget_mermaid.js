@@ -6,7 +6,7 @@ import { registry } from "@web/core/registry";
 import { uniqueId } from "@web/core/utils/functions";
 
 export class MermaidField extends TextField {
-    static template = 'web_widget_mermaid.MermaidField';
+    static template = 'web_widget_mermaid_field.MermaidField';
 
     static props = {
         ...TextField.props,
