@@ -34,7 +34,7 @@ export class MermaidField extends TextField {
 
 }
 
-MermaidField.template = "web_widget_mermaid.MermaidField";
+MermaidField.template = "web_widget_mermaid_field.MermaidField";
 MermaidField.supportedTypes = ["text"];
 MermaidField.props = {
     ...TextField.props,
