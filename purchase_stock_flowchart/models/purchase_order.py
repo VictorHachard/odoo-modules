@@ -29,8 +29,8 @@ class PurchaseOrder(models.Model):
                 flowchart.append(hierarchy[0]._get_flowchart_sub_graph())
                 flowchart.append(f'po{self.id} --> sub{hierarchy[0].id}')
             elif len(hierarchy) == 1:
-                flowchart.append(hierarchy[0]._get_flowchart_click())
                 flowchart.append(f'po{self.id} --> {hierarchy[0]._get_flowchart_element()}')
+                flowchart.append(hierarchy[0]._get_flowchart_click())
         return '\n'.join(flowchart)
 
     def _get_flowchart_style(self):
