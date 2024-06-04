@@ -2,12 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="web_widget_mermaid_field.MermaidField">
-        <div t-attf-style="{{ style }}">
+        <div t-attf-style="{{ this.state.style }}">
             <div
-                    t-attf-id="{{ chartId }}"
-                    t-attf-style="{{ subStyle }}"
+                    t-attf-id="{{ this.state.chartId }}"
+                    t-attf-style="{{ this.state.subStyle }}"
                     class="o_form_field_mermaid"
-                    t-out="mermaidSvg"
+                    t-out="this.state.mermaidSvg"
             >
             </div>
         </div>
