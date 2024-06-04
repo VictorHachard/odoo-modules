@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { onWillStart, markup } from "@odoo/owl";
+import { onWillStart, onWillPatch, useState, markup } from "@odoo/owl";
 import { TextField } from "@web/views/fields/text/text_field";
 import { registry } from "@web/core/registry";
 
@@ -13,35 +13,51 @@ export class MermaidField extends TextField {
 
     setup() {
         super.setup();
-        this.chartId = _.uniqueId("mermaid_chart_");
         const { mermaid_scroll_x, division_ration, ...mermaidConfig } = this.props.mermaidConfig;
         this.config = Object.assign({}, {
             logLevel: "fatal",
             securityLevel: "strict",
             startOnLoad: false,
         }, mermaidConfig);
-        this.style = '';
-        this.subStyle = '';
-        if (mermaid_scroll_x) {
-            this.style += 'overflow-x: auto;';
-        }
-        this.mermaidSvg = "";
+        this.state = useState({
+            style: mermaid_scroll_x ? 'overflow-x: auto;' : '',
+            subStyle: this.subStyle,
+            mermaidSvg: "",
+            chartId: "",
+            data: "",
+        });
+
         onWillStart(async () => {
             if (this.props.record.data[this.props.name]) {
-                try {
-                    const { svg } = await mermaid.render(this.chartId, this.props.record.data[this.props.name]);
-                    let maxWidth = parseFloat($(svg).css("max-width"));
-                    if (division_ration) {
-                        const ratio = parseFloat(division_ration);
-                        maxWidth = maxWidth / ratio;
-                    }
-                    this.subStyle = `width: ${maxWidth}px;`;
-                    this.mermaidSvg = markup(svg);
-                } catch (e) {
-                    this.mermaidSvg = `<pre>${e.message || e.str}</pre>`;
-                }
+                await this.renderMermaid();
             }
         });
+
+        onWillPatch(async () => {
+            // TODO: Check if this is the best way to update the mermaid chart
+            if (this.props.record.data[this.props.name] && this.props.record.data[this.props.name] !== this.state.data) {
+                await this.renderMermaid();
+            }
+       });
+
+    }
+
+    async renderMermaid() {
+        try {
+            const chartId = _.uniqueId("mermaid_chart_");
+            const { svg } = await mermaid.render(chartId, this.props.record.data[this.props.name]);
+            let maxWidth = parseFloat($(svg).css("max-width"));
+            if (this.props.mermaidConfig.division_ration) {
+                const ratio = parseFloat(this.props.mermaidConfig.division_ration);
+                maxWidth = maxWidth / ratio;
+            }
+            this.state.subStyle = `width: ${maxWidth}px;`;
+            this.state.mermaidSvg = markup(svg);
+            this.state.chartId = chartId;
+            this.state.data = this.props.record.data[this.props.name];
+        } catch (e) {
+            this.state.mermaidSvg = `<pre>${e.message || e.str}</pre>`;
+        }
     }
 
 }
