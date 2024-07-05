@@ -4,7 +4,7 @@
     "summary": "Update the breadcrumb name of the website product page",
     "description": "Update the breadcrumb name of the website product page",
     'images': ['static/description/banner.jpg'],  # 560x280 px
-    "category": 'Hidden',
+    "category": 'Website/Website',
     "version": "0.0.1",
     "license": "AGPL-3",
     "author": "Victor",
