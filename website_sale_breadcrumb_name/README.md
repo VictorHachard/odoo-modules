@@ -1,4 +1,4 @@
-# Mermaid Widget Field - Odoo Module
+# Website Breadcumb Custom - Odoo Module
 
 Update the breadcrumb name of the website product page.
 
