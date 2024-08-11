@@ -24,13 +24,17 @@ class SaleOrder(models.Model):
             self._get_flowchart_element(more_info=more_info),
             self._get_flowchart_click()
         ]
+        i18n, menu_id = None, None
+        if self.picking_ids:
+            i18n = dict(self.env['stock.picking'].fields_get(allfields=['state'])['state']['selection'])
+            menu_id = self.env.ref('stock.menu_stock_root').id
         for hierarchy in self.picking_ids._get_picking_hierarchy():
             if len(hierarchy) > 1:
-                flowchart.append(hierarchy[0]._get_flowchart_sub_graph())
+                flowchart.append(hierarchy[0]._get_flowchart_sub_graph(i18n, menu_id))
                 flowchart.append(f'so{self.id} --> sub{hierarchy[0].id}')
             elif len(hierarchy) == 1:
-                flowchart.append(f'so{self.id} --> {hierarchy[0]._get_flowchart_element()}')
-                flowchart.append(hierarchy[0]._get_flowchart_click())
+                flowchart.append(f'so{self.id} --> {hierarchy[0]._get_flowchart_element(i18n)}')
+                flowchart.append(hierarchy[0]._get_flowchart_click(menu_id))
         return '\n'.join(flowchart)
 
     def _get_flowchart_style(self):
@@ -63,7 +67,8 @@ class SaleOrder(models.Model):
             return f'so{self.id}("{self.name} - {_(i18n[self.state])}\n{self.partner_id.display_name}"):::{state}'
         return f'so{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
 
-    def _get_flowchart_click(self):
+    def _get_flowchart_click(self, menu_id=None):
         self.ensure_one()
-        menu_id = self.env.ref('sale.sale_order_menu')
-        return f'click so{self.id} "/web#id={self.id}&model=sale.order&view_type=form&menu_id={menu_id.id}" _blank'
+        if not menu_id:
+            menu_id = self.env.ref('sale.sale_order_menu').id
+        return f'click so{self.id} "/web#id={self.id}&model=sale.order&view_type=form&menu_id={menu_id}" _blank'
