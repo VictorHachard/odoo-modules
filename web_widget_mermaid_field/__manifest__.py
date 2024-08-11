@@ -13,7 +13,6 @@
     "depends": ["web"],
     "assets": {
         "web.assets_backend": [
-            "web_widget_mermaid_field/static/src/js/mermaid_10_9_1.js",
             "web_widget_mermaid_field/static/src/js/web_widget_mermaid.js",
             "web_widget_mermaid_field/static/src/xml/mermaid_field.xml",
         ],
