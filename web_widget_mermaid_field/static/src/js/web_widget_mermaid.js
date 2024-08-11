@@ -1,8 +1,9 @@
 /** @odoo-module **/
 
-import { onWillStart, onWillPatch, useState, markup } from "@odoo/owl";
+import { onWillStart, onPatched, onMounted, useState, markup } from "@odoo/owl";
 import { TextField } from "@web/views/fields/text/text_field";
 import { registry } from "@web/core/registry";
+import { loadBundle } from "@web/core/assets";
 
 export class MermaidField extends TextField {
 
@@ -12,6 +13,16 @@ export class MermaidField extends TextField {
     }
 
     setup() {
+        onMounted(async () => {
+            if (this.props.record.data[this.props.name]) {
+                await this.renderMermaid();
+            }
+        });
+        onPatched(async () => {
+            if (this.props.record.data[this.props.name] && this.props.record.data[this.props.name] !== this.state.data) {
+                await this.renderMermaid();
+            }
+        });
         super.setup();
         const { mermaid_scroll_x, division_ration, ...mermaidConfig } = this.props.mermaidConfig;
         this.config = Object.assign({}, {
@@ -27,19 +38,13 @@ export class MermaidField extends TextField {
             data: "",
         });
 
-        onWillStart(async () => {
-            if (this.props.record.data[this.props.name]) {
-                await this.renderMermaid();
-            }
-        });
-
-        onWillPatch(async () => {
-            // TODO: Check if this is the best way to update the mermaid chart
-            if (this.props.record.data[this.props.name] && this.props.record.data[this.props.name] !== this.state.data) {
-                await this.renderMermaid();
-            }
-       });
-
+        onWillStart(() =>
+            loadBundle({
+                jsLibs: [
+                    "/web_widget_mermaid_field/static/src/js/mermaid_10_9_1.js",
+                ],
+            })
+        );
     }
 
     async renderMermaid() {
