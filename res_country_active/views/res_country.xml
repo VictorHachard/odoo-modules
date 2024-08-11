@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="view_res_country_search_inherit" model="ir.ui.view">
+            <field name="name">view.res.country.search.inherit</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_res_country_tree_inherit" model="ir.ui.view">
+            <field name="name">view.res.country.tree.inherit</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="active" column_invisible="True"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
