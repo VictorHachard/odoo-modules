@@ -8,31 +8,35 @@ from odoo import api, models, fields, _
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    def _get_flowchart_sub_graph(self):
+    def _get_flowchart_sub_graph(self, i18n=None, menu_id=None):
         self.ensure_one()
+        if not i18n:
+            i18n = dict(self.env['stock.picking'].fields_get(allfields=['state'])['state']['selection'])
+        if not menu_id:
+            menu_id = self.env.ref('stock.menu_stock_root').id
         click_done = []
         flowchart = [f'subgraph sub{self.id} [" "]', 'direction LR']
         # Add all backorder parent recursively
         backorder = self
         while backorder.backorder_id:
-            flowchart.append(f'{backorder.backorder_id._get_flowchart_element()} --> {backorder._get_flowchart_element()}')
+            flowchart.append(f'{backorder.backorder_id._get_flowchart_element(i18n)} --> {backorder._get_flowchart_element(i18n)}')
             if backorder.backorder_id.id not in click_done:
-                flowchart.append(backorder.backorder_id._get_flowchart_click())
+                flowchart.append(backorder.backorder_id._get_flowchart_click(menu_id))
                 click_done.append(backorder.backorder_id.id)
             if backorder.id not in click_done:
-                flowchart.append(backorder._get_flowchart_click())
+                flowchart.append(backorder._get_flowchart_click(menu_id))
                 click_done.append(backorder.id)
             backorder = backorder.backorder_id
         # Add all backorder child recursively
         backorder = self
         while backorder.backorder_ids:
             for back in backorder.backorder_ids:
-                flowchart.append(f'{backorder._get_flowchart_element()} --> {back._get_flowchart_element()}')
+                flowchart.append(f'{backorder._get_flowchart_element(i18n)} --> {back._get_flowchart_element(i18n)}')
                 if backorder.id not in click_done:
-                    flowchart.append(backorder._get_flowchart_click())
+                    flowchart.append(backorder._get_flowchart_click(menu_id))
                     click_done.append(backorder.id)
                 if back.id not in click_done:
-                    flowchart.append(back._get_flowchart_click())
+                    flowchart.append(back._get_flowchart_click(menu_id))
                     click_done.append(back.id)
                 backorder = back
         flowchart.append('end')
@@ -85,7 +89,8 @@ class StockPicking(models.Model):
         state = self._get_flowchart_state_color().get(self.state)
         return f'sp{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
 
-    def _get_flowchart_click(self):
+    def _get_flowchart_click(self, menu_id=None):
         self.ensure_one()
-        stock_menu = self.env.ref('stock.menu_stock_root')
-        return f'click sp{self.id} "/web#id={self.id}&model=stock.picking&view_type=form&menu_id={stock_menu.id}" _blank'
+        if not menu_id:
+            menu_id = self.env.ref('stock.menu_stock_root').id
+        return f'click sp{self.id} "/web#id={self.id}&model=stock.picking&view_type=form&menu_id={menu_id}" _blank'

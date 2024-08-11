@@ -5,7 +5,7 @@
     "description": "This module enhances the Purchase Order by adding a flowchart that visually represents the stock flow, providing a clearer understanding of inventory movements associated with each order.",
     'images': ['static/description/banner.png'],  # 560x280 px
     "category": 'Inventory/Purchase',
-    "version": "0.0.2",
+    "version": "0.0.3",
     "license": "AGPL-3",
     "author": "Victor",
     "price": 0,
