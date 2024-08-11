@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Country Active",
+    "name": "Country Archive/Unarchive",
     "summary": "This module adds an active field to the country model.",
     "description": "This module adds an active field to the country model.",
     "category": 'Technical',
