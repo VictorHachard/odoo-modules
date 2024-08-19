@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="export_pdf" model="ir.actions.report">
+        <field name="name">Export</field>
+        <field name="model">ir.exports</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">export_pdf.export_in_pdf</field>
+    </record>
+
+    <template id="export_in_pdf">
+        <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="12"/>
+            <t t-set="data_report_header_spacing" t-value="9"/>
+            <t t-set="data_report_dpi" t-value="110"/>
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                                <t t-foreach="header" t-as="header_line">
+                                    <th style="padding: 4px; width: 100px;">
+                                        <span t-esc="header_line" t-lang="request.lang"/>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data" t-as="row">
+                                <tr>
+                                    <t t-foreach="row" t-as="cell">
+                                        <td style="padding: 4px; width: 100px;">
+                                            <span t-esc="cell" t-lang="request.lang"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
