@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- OffCanvas Nav -->
+    <template id="o_wsale_offcanvas" inherit_id="website_sale.o_wsale_offcanvas">
+        <xpath expr="//div[@t-attf-id='o_wsale_offcanvas_attribute_{{a.id}}']/div" position="inside">
+            <div t-if="a.is_all_value_numeric and a.display_type == 'range'" class="mb-3 o_wsale_attribute_products_page">
+                <t t-foreach="a.value_ids" t-as="v">
+                    <label style="display:none">
+                        <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None"/>
+                    </label>
+                </t>
+
+                <t t-set="min_value" t-value="min([float(v) for v in a.value_ids.mapped('name')])"/>
+                <t t-set="max_value" t-value="max([float(v) for v in a.value_ids.mapped('name')])"/>
+                <t t-set="attrib_set_contains_attrib" t-value="attrib_set and len([v.id for v in a.value_ids if v.id in attrib_set]) > 0"/>
+                <t t-set="current_min_value" t-value="min([float(v.name) for v in a.value_ids if v.id in attrib_set]) if attrib_set_contains_attrib else min_value"/>
+                <t t-set="current_max_value" t-value="max([float(v.name) for v in a.value_ids if v.id in attrib_set]) if attrib_set_contains_attrib else max_value"/>
+
+                <div style="margin-bottom: -2rem;">
+                    <input type="range" multiple="multiple"
+                           t-attf-class="form-range range-with-input mb-0"
+                           t-att-data-attribute_id="a.id"
+                           t-att-data-attribute_values="','.join([v.name + '-' + str(v.id) for v in a.value_ids])"
+                           t-att-value="'%s,%s' % (current_min_value, current_max_value)"
+                           t-att-step="1" t-att-min="min_value" t-att-max="max_value"
+                           t-att-format="a.range_display_type" t-att-uom="a.uom"
+                    />
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="products_attributes" inherit_id="website_sale.products_attributes">
+        <xpath expr="//div[hasclass('accordion-item')]/div" position="inside">
+            <div t-if="a.is_all_value_numeric and a.display_type == 'range'" class="mb-3 o_wsale_attribute_products_page">
+                <t t-foreach="a.value_ids" t-as="v">
+                    <label style="display:none">
+                        <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None"/>
+                    </label>
+                </t>
+
+                <t t-set="min_value" t-value="min([float(v) for v in a.value_ids.mapped('name')])"/>
+                <t t-set="max_value" t-value="max([float(v) for v in a.value_ids.mapped('name')])"/>
+                <t t-set="attrib_set_contains_attrib" t-value="attrib_set and len([v.id for v in a.value_ids if v.id in attrib_set]) > 0"/>
+                <t t-set="current_min_value" t-value="min([float(v.name) for v in a.value_ids if v.id in attrib_set]) if attrib_set_contains_attrib else min_value"/>
+                <t t-set="current_max_value" t-value="max([float(v.name) for v in a.value_ids if v.id in attrib_set]) if attrib_set_contains_attrib else max_value"/>
+
+                <div style="margin-bottom: -2rem;">
+                    <input type="range" multiple="multiple"
+                           t-attf-class="form-range range-with-input mb-0"
+                           t-att-data-attribute_id="a.id"
+                           t-att-data-attribute_values="','.join([v.name + '-' + str(v.id) for v in a.value_ids])"
+                           t-att-value="'%s,%s' % (current_min_value, current_max_value)"
+                           t-att-step="1" t-att-min="min_value" t-att-max="max_value"
+                           t-att-format="a.range_display_type" t-att-uom="a.uom"
+                    />
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

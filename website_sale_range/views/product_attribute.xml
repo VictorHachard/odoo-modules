@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_attribute_view_form_inherit" model="ir.ui.view">
+        <field name="name">product.attribute.form.view</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_type']" position="after">
+                <field name="uom" attrs="{'invisible': [('display_type', '!=', 'range')]}"/>
+                <field name="range_display_type" attrs="{'invisible': [('display_type', '!=', 'range')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_sale_range
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0-20231211\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-15 14:04+0000\n"
+"PO-Revision-Date: 2023-12-15 14:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__range_display_type__default
+msgid "Default"
+msgstr "Défaut"
+
+#. module: website_sale_range
+#: model:ir.model.fields,field_description:website_sale_range.field_product_attribute__display_type
+msgid "Display Type"
+msgstr "Type d'affichage"
+
+#. module: website_sale_range
+#: model:ir.model.fields,help:website_sale_range.field_product_attribute__range_display_type
+msgid "Display type for the range slider"
+msgstr "Type d'affichage pour le curseur de plage"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__range_display_type__float
+msgid "Float"
+msgstr "Décimal"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__range_display_type__float_no_locale
+msgid "Float No Locale"
+msgstr "Décimal sans localisation"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__range_display_type__integer
+msgid "Integer"
+msgstr "Entier"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__range_display_type__integer_no_locale
+msgid "Integer No Locale"
+msgstr "Entier sans localisation"
+
+#. module: website_sale_range
+#: model:ir.model.fields,field_description:website_sale_range.field_product_attribute__is_all_value_numeric
+msgid "Is All Value Numeric"
+msgstr "Toutes les valeurs sont numériques"
+
+#. module: website_sale_range
+#: model:ir.model,name:website_sale_range.model_product_attribute
+msgid "Product Attribute"
+msgstr "Attribut de produit"
+
+#. module: website_sale_range
+#: model:ir.model.fields.selection,name:website_sale_range.selection__product_attribute__display_type__range
+msgid "Range"
+msgstr "Plage"
+
+#. module: website_sale_range
+#: model:ir.model.fields,field_description:website_sale_range.field_product_attribute__range_display_type
+msgid "Range Display Type"
+msgstr "Type d'affichage de la plage"
+
+#. module: website_sale_range
+#: model:ir.model.fields,help:website_sale_range.field_product_attribute__display_type
+msgid "The display type used in the Product Configurator."
+msgstr "Le type d'affichage utilisé dans le configurateur de produit."
+
+#. module: website_sale_range
+#: model:ir.model.fields,field_description:website_sale_range.field_product_attribute__uom
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: website_sale_range
+#: model:ir.model.fields,help:website_sale_range.field_product_attribute__uom
+msgid "Unit of Measure for the attribute values"
+msgstr "Unité de mesure pour les valeurs d'attribut"
