@@ -3,6 +3,7 @@
     "name": "Website Sale Range Filter",
     "summary": """Add a range filter to the shop page""",
     'description': """Add a range filter to the shop page like the price filter""",
+    'images': ['static/description/banner.png'],  # 560x280 px
     "category": "Website",
     'version': '0.0.1',
     'author': "Victor",
