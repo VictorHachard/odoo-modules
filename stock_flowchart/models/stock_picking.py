@@ -3,6 +3,7 @@
 from collections import defaultdict
 
 from odoo import api, models, fields, _
+from odoo.models import NewId
 
 
 class StockPicking(models.Model):
@@ -48,23 +49,26 @@ class StockPicking(models.Model):
         # Creating a dictionary with parent picking as key and list of child pickings as value
         for picking in self:
             if picking.backorder_id:
-                parent_dict[picking.backorder_id.id].append(picking)
+                _id = picking.backorder_id._origin.id if isinstance(picking.backorder_id.id, NewId) else picking.backorder_id.id
+                parent_dict[_id].append(picking)
 
         # Function to recursively get all child pickings
         def get_children(parent_id):
             children = parent_dict.get(parent_id, [])
             all_children = []
             for child in children:
+                _id = child._origin.id if isinstance(child.id, NewId) else child.id
                 all_children.append(child)
-                all_children.extend(get_children(child.id))
+                all_children.extend(get_children(_id))
             return all_children
 
         # Generate the final list of lists
         picking_hierarchy = []
         for picking in self:
             if not picking.backorder_id:  # Only start with parent pickings
+                _id = picking._origin.id if isinstance(picking.id, NewId) else picking.id
                 hierarchy = [picking]
-                hierarchy.extend(get_children(picking.id))
+                hierarchy.extend(get_children(_id))
                 picking_hierarchy.append(hierarchy)
 
         return picking_hierarchy
@@ -85,7 +89,7 @@ class StockPicking(models.Model):
     def _get_flowchart_element(self, i18n=None):
         self.ensure_one()
         if not i18n:
-            i18n = dict(self.env['stock.picking'].fields_get(allfields=['state'])['state']['selection'])
+            i18n = self._get_flowchart_i18n()
         state = self._get_flowchart_state_color().get(self.state)
         return f'sp{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
 
@@ -93,4 +97,5 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not menu_id:
             menu_id = self.env.ref('stock.menu_stock_root').id
-        return f'click sp{self.id} "/web#id={self.id}&model=stock.picking&view_type=form&menu_id={menu_id}" _blank'
+        _id = self._origin.id if isinstance(self.id, NewId) else self.id
+        return f'click sp{self.id} "/web#id={_id}&model=stock.picking&view_type=form&menu_id={menu_id}" _blank'
