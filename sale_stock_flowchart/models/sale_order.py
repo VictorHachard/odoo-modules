@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, models, fields, _
+from odoo.models import NewId
 
 
 class SaleOrder(models.Model):
@@ -71,4 +72,5 @@ class SaleOrder(models.Model):
         self.ensure_one()
         if not menu_id:
             menu_id = self.env.ref('sale.sale_order_menu').id
-        return f'click so{self.id} "/web#id={self.id}&model=sale.order&view_type=form&menu_id={menu_id}" _blank'
+        _id = self._origin.id if isinstance(self.id, NewId) else self.id
+        return f'click so{self.id} "/web#id={_id}&model=sale.order&view_type=form&menu_id={menu_id}" _blank'

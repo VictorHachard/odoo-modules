@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, models, fields, _
+from odoo.models import NewId
 
 
 class PurchaseOrder(models.Model):
@@ -72,4 +73,5 @@ class PurchaseOrder(models.Model):
         self.ensure_one()
         if not menu_id:
             menu_id = self.env.ref('purchase.menu_purchase_root').id
-        return f'click po{self.id} "/web#id={self.id}&model=purchase.order&view_type=form&menu_id={menu_id}" _blank'
+        _id = self._origin.id if isinstance(self.id, NewId) else self.id
+        return f'click po{self.id} "/web#id={_id}&model=purchase.order&view_type=form&menu_id={menu_id}" _blank'
