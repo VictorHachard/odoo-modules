@@ -63,7 +63,7 @@ export class MermaidField extends TextField {
             this.state.chartId = chartId;
             this.state.data = this.props.record.data[this.props.name];
         } catch (e) {
-            this.state.mermaidSvg = `<pre>${e.message || e.str}</pre>`;
+            this.state.mermaidSvg = markup(`<pre>${e.message || e.str}</pre>`);
         }
     }
 
