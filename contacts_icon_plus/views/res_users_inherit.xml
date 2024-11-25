@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cip_res_users_preferences_form_view_inherit" model="ir.ui.view">
+            <field name="name">cip.res.users.preferences.form.view.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='signature']" position="before">
+                    <group name="cip_preferences">
+                        <field name="partner_icon_type_detailed"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

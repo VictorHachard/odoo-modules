@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- These widget templates are intended for read-only mode only -->
+
+    <t t-name="partner_icon_type_selection_widget" owl="1">
+        <span>
+            <i class="fa fa-male" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'individual'"/>
+            <i class="fa fa-building" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'company'"/>
+            <i class="fa fa-id-badge" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'employee'"/>
+            <i class="fa fa-address-book" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'contact' || value == 'invoice' || value == 'delivery' || value == 'private' || value == 'other'"/>
+        </span>
+    </t>
+
+    <t t-name="partner_icon_type_selection_all_widget" owl="1">
+        <span>
+            <i class="fa fa-male" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'individual'"/>
+            <i class="fa fa-building" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'company'"/>
+            <i class="fa fa-id-badge" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'employee'"/>
+            <i class="fa fa-money" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'invoice'"/>
+            <i class="fa fa-truck" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'delivery'"/>
+            <i class="fa fa-lock" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'private'"/>
+            <i class="fa fa-ellipsis-v" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'other'"/>
+            <i class="fa fa-address-book" t-att-data-tooltip="getPartnerIconTypeSelectionTitle" t-if="value == 'contact'"/>
+        </span>
+    </t>
+
+</templates>

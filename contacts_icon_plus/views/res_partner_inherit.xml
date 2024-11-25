@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cip_res_partner_tree_view_inherit" model="ir.ui.view">
+            <field name="name">cip.res.partner.tree.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="icon_type_selection" widget="partner_icon_type_all" nolabel="1" width="24px"
+                           groups="contacts_icon_plus.group_partner_icon_type_detailed"/>
+                    <field name="icon_type_selection_easy" widget="partner_icon_type" nolabel="1" width="24px"
+                           groups="!contacts_icon_plus.group_partner_icon_type_detailed"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="cip_res_partner_kanban_view_inherit" model="ir.ui.view">
+            <field name="name">cip.res.partner.kanban.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='id']" position="after">
+                    <field name="icon_type_selection"/>
+                    <field name="icon_type_selection_easy"/>
+                </xpath>
+                <xpath expr="//strong[hasclass('o_kanban_record_title', 'oe_partner_heading')]/field[@name='display_name']" position="before">
+                    <span class="me-2">
+                        <field name="icon_type_selection" widget="partner_icon_type_all" groups="contacts_icon_plus.group_partner_icon_type_detailed"/>
+                        <field name="icon_type_selection_easy" widget="partner_icon_type" groups="!contacts_icon_plus.group_partner_icon_type_detailed"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="cip_res_partner_search_view_inherit" model="ir.ui.view">
+            <field name="name">cip.res.partner.search.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='type_person']" position="after">
+                    <filter string="Employee" name="type_company" domain="[('icon_type_selection', '=', 'employee')]"/>
+                </xpath>
+                <xpath expr="//filter[@name='type_company']" position="after">
+                    <filter string="Contact" name="type_company" domain="[('icon_type_selection', '=', 'contact')]"/>
+                </xpath>
+                <xpath expr="//filter[@name='type_person']" position="attributes">
+                    <attribute name="domain">[('icon_type_selection', '=', 'individual')]</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='group_by']" position="inside">
+                    <filter name="group_icon_type_selection" string="Type" context="{'group_by': 'icon_type_selection'}" groups="contacts_icon_plus.group_partner_icon_type_detailed"/>
+                    <filter name="group_icon_type_selection_easy" string="Type" context="{'group_by': 'icon_type_selection_easy'}" groups="!contacts_icon_plus.group_partner_icon_type_detailed"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

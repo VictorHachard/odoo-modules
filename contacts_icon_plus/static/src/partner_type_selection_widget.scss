@@ -1,0 +1,6 @@
+// Center the widget in tree view
+tr.o_data_row td:has(> div[name='icon_type_selection']) {
+  min-width: 24px;
+  width: 24px;
+  text-align: center;
+}
