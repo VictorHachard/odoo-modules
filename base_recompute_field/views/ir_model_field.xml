@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_model_fields_form_inherited" model="ir.ui.view">
+			<field name="name">view.model.fields.form.inherit</field>
+			<field name="model">ir.model.fields</field>
+			<field name="inherit_id" ref="base.view_model_fields_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//sheet" position="before">
+					<header>
+						<field name="can_recompute" groups="base.group_no_one" invisible="1"/>
+						<button string="Recompute Field" type="object" name="recompute_field"
+                            class="oe_stat_button" icon="fa-refresh" groups="base.group_no_one"
+                            invisible="not can_recompute"/>
+					</header>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>
