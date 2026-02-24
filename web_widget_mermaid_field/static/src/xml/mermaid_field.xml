@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web_widget_mermaid_field.MermaidField">
+        <div t-attf-style="{{ this.state.style }}">
+            <div
+                    t-attf-id="{{ this.state.chartId }}"
+                    t-attf-style="{{ this.state.subStyle }}"
+                    class="o_form_field_mermaid"
+                    t-out="this.state.mermaidSvg"
+            >
+            </div>
+        </div>
+    </t>
+
+</templates>

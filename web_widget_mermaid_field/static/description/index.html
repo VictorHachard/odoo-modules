@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <br>
+        <p>This modules add the Mermaid.js library to Odoo. Mermaid is a simple markdown-like script language for generating charts from text via JavaScript. It is used to create diagrams and flowcharts.</p>
+
+        <p>
+            Create a Text field in a model and add the widget "mermaid" to the field.
+        </p>
+
+        <pre>mermaid_diagram = fields.Text('Mermaid Diagram', compute='_get_mermaid_diagram')</pre>
+
+        <pre>def _get_mermaid_diagram(self):
+    for rec in self:
+        rec.mermaid_diagram = """
+        graph LR;
+            A-->B;
+            A-->C;
+            B-->D;
+            C-->D;
+        """</pre>
+
+        <pre>&lt;field name=&quot;mermaid_diagram&quot; widget=&quot;mermaid&quot;/&gt;</pre>
+
+        <p>To update the initialization configuration of the mermaid library, you can add it to the options attribute of the field.</p>
+
+        <pre>&lt;field name=&quot;mermaid_diagram&quot; widget=&quot;mermaid&quot; options=&quot;{'theme': 'dark'}&quot;/&gt;</pre>
+
+        <div class="my-2">
+            <img src="banner.png" alt="Mermaid Widget Screenshot" style="width: 25%;">
+        </div>
+
+        <p>Available options: 'mermaid_scroll_x', 'division_ration'</p>
+
+        <p>Can be used to have a horizontal scroll bar for the diagram.</p>
+
+        <pre>
+&lt;group&gt;
+    &lt;field colspan=&quot;2&quot; nolabel=&quot;1&quot; name=&quot;mermaid_diagram&quot; widget=&quot;mermaid&quot; options=&quot;{'mermaid_scroll_x': True, 'division_ration': 1.5}&quot;/&gt;
+&lt;/group&gt;
+        </pre>
+
+        <div class="my-2">
+            <img src="print_sale_stock.png" alt="Mermaid Widget Screenshot" style="width: 50%;">
+        </div>
+
+        <p>To update the library, you can download the latest minified version and replace the file in the module.</p>
+
+        <h4>Contributing:</h4>
+        <p>If you're interested in contributing, please visit the <a href="https://github.com/VictorHachard/odoo-modules" target="_blank">GitHub repository</a> @ github.com/VictorHachard/odoo-modules</p>
+
+        <h4>Issue:</h4>
+        <p>If you encounter any issues, please visit the <a href="https://github.com/VictorHachard/odoo-modules/issues" target="_blank">GitHub repository issue section</a> @ github.com/VictorHachard/odoo-modules/issues</p>
+
+    </body>
+</html>
