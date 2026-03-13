@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="web.SearchBarMenu" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='filterItems.length']" position="attributes">
+            <attribute name="t-if">filterItems.length and !hideCustomFilter</attribute>
+        </xpath>
+        <xpath expr="//DropdownItem" position="attributes">
+            <attribute name="t-if">!hideCustomFilter</attribute>
+        </xpath>
+    </t>
+
+</templates>
