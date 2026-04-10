@@ -4,7 +4,7 @@
     "summary": "Activate or deactivate the product availability notification.",
     "description": "Activate or deactivate the product availability notification.",
     "category": 'Website/Website',
-    "version": "0.0.1",
+    "version": "0.0.2",
     "license": "AGPL-3",
     "author": "Victor",
     "price": 0,
@@ -16,7 +16,7 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'website_sale_stock_notification/static/src/js/*',
+            'website_sale_stock_notification/static/src/xml/product_availability.xml',
         ],
     },
     "installable": True,

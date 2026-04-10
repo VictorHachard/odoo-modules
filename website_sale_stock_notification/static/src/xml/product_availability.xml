@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="website_sale_stock.product_availability"
+       t-inherit="website_sale_stock.product_availability"
+       t-inherit-mode="extension">
+        <xpath expr="//div[@id='stock_notification_div']" position="attributes">
+            <attribute name="t-if">!allow_out_of_stock_order and out_of_stock_back_in_stock_message</attribute>
+        </xpath>
+    </t>
+</templates>
