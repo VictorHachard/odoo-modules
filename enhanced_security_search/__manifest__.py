@@ -5,7 +5,7 @@
     'description': """This module allows to manage access to custom filters, custom group by, and shared favorites in Odoo through user group assignments.""",
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'author': "Victor",
     'license': 'LGPL-3',
     'price': 0,
