@@ -3,6 +3,8 @@
 from odoo import api, models, fields, _
 from odoo.api import NewId
 
+from odoo.addons.stock_flowchart.tools import mermaid_label
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -64,9 +66,9 @@ class SaleOrder(models.Model):
         if not i18n:
             i18n = self._get_flowchart_i18n()
         state = self._get_flowchart_state_color().get(self.state)
-        if more_info:
-            return f'so{self.id}("{self.name} - {_(i18n[self.state])}\n{self.partner_id.display_name}"):::{state}'
-        return f'so{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
+        title = f'{self.name} - {_(i18n[self.state])}'
+        label = mermaid_label(title, self.partner_id.display_name) if more_info else mermaid_label(title)
+        return f'so{self.id}({label}):::{state}'
 
     def _get_flowchart_click(self, menu_id=None):
         self.ensure_one()
