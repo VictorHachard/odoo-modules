@@ -4,7 +4,7 @@
     "summary": "Technical module that adds a generic flowchart to stock for use by other modules.",
     "description": "Technical module that adds a generic flowchart to stock for use by other modules.",
     "category": "Hidden",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "license": "AGPL-3",
     "author": "HVG Solutions",
     "website": "https://hvg-solutions.com",
