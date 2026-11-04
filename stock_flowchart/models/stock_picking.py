@@ -5,6 +5,8 @@ from collections import defaultdict
 from odoo import api, models, fields, _
 from odoo.api import NewId
 
+from odoo.addons.stock_flowchart.tools import mermaid_label
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -28,9 +30,11 @@ class StockPicking(models.Model):
                 flowchart.append(backorder._get_flowchart_click(menu_id))
                 click_done.append(backorder.id)
             backorder = backorder.backorder_id
-        # Add all backorder child recursively
-        backorder = self
-        while backorder.backorder_ids:
+        # Add all backorder child recursively, every branch of the tree
+        stack = [self]
+        visited = {self.id}
+        while stack:
+            backorder = stack.pop()
             for back in backorder.backorder_ids:
                 flowchart.append(f'{backorder._get_flowchart_element(i18n)} --> {back._get_flowchart_element(i18n)}')
                 if backorder.id not in click_done:
@@ -39,7 +43,9 @@ class StockPicking(models.Model):
                 if back.id not in click_done:
                     flowchart.append(back._get_flowchart_click(menu_id))
                     click_done.append(back.id)
-                backorder = back
+                if back.id not in visited:
+                    visited.add(back.id)
+                    stack.append(back)
         flowchart.append('end')
         return '\n'.join(flowchart)
 
@@ -91,7 +97,8 @@ class StockPicking(models.Model):
         if not i18n:
             i18n = self._get_flowchart_i18n()
         state = self._get_flowchart_state_color().get(self.state)
-        return f'sp{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
+        label = mermaid_label(f'{self.name} - {_(i18n[self.state])}')
+        return f'sp{self.id}({label}):::{state}'
 
     def _get_flowchart_click(self, menu_id=None):
         self.ensure_one()
