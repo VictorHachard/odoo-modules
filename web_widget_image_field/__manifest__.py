@@ -7,7 +7,7 @@
     """,
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
-    'version': '0.0.2',
+    'version': '0.0.3',
     'author': "HVG Solutions",
     'website': "https://hvg-solutions.com",
     'license': 'LGPL-3',
@@ -20,6 +20,9 @@
         'web.assets_backend': [
             'web_widget_image_field/static/src/many2one_image_field/*.js',
             'web_widget_image_field/static/src/many2one_image_field/*.xml',
+        ],
+        'web.assets_unit_tests': [
+            'web_widget_image_field/static/tests/**/*.js',
         ],
     },
     'installable': True,

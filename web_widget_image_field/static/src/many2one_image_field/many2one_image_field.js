@@ -45,7 +45,10 @@ export const many2OneImageField = {
     additionalClasses: ["o_field_many2one_image"],
     extractProps(fieldInfo) {
         const props = many2OneField.extractProps(...arguments);
-        props.canOpen = fieldInfo.viewType === "form";
+        // Only default to the view type when no_open is not given
+        if (!("no_open" in fieldInfo.options)) {
+            props.canOpen = fieldInfo.viewType === "form";
+        }
         props.imageField = fieldInfo.options.image_field || 'image_128';
         return props;
     },
