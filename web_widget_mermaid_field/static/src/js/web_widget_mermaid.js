@@ -35,6 +35,7 @@ export class MermaidField extends Component {
             style: mermaid_scroll_x ? 'overflow-x: auto;' : '',
             subStyle: this.subStyle,
             mermaidSvg: "",
+            error: "",
             chartId: "",
             data: "",
         });
@@ -57,11 +58,16 @@ export class MermaidField extends Component {
                 maxWidth = maxWidth / ratio;
             }
             this.state.subStyle = `width: ${maxWidth}px;`;
+            // Mermaid sanitizes the SVG it renders (securityLevel "strict").
             this.state.mermaidSvg = markup(svg);
+            this.state.error = "";
             this.state.chartId = chartId;
             this.state.data = this.props.record.data[this.props.name];
         } catch (e) {
-            this.state.mermaidSvg = markup(`<pre>${e.message || e.str}</pre>`);
+            // The error message echoes the diagram source: show it as text.
+            this.state.mermaidSvg = "";
+            this.state.error = String(e?.message || e?.str || e);
+            this.state.data = this.props.record.data[this.props.name];
         }
     }
 }
