@@ -5,7 +5,7 @@
     "description": "Add the Mermaid.js library to Odoo and create a widget to display Mermaid diagrams in Odoo views.",
     "images": ['static/description/banner.png'],  # 560x280 px
     "category": "Technical",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "HVG Solutions",
     "website": "https://hvg-solutions.com",
     "license": 'LGPL-3',
@@ -19,6 +19,9 @@
         ],
         "web_widget_mermaid_field.mermaid_lib": [
             "/web_widget_mermaid_field/static/src/js/mermaid_10_9_1.js",
+        ],
+        "web.assets_unit_tests": [
+            "web_widget_mermaid_field/static/tests/**/*.js",
         ],
     },
     "installable": True,

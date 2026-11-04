@@ -3,6 +3,7 @@
 
     <t t-name="web_widget_mermaid_field.MermaidField">
         <div t-attf-style="{{ this.state.style }}">
+            <pre t-if="this.state.error" class="o_form_field_mermaid_error" t-esc="this.state.error"/>
             <div
                     t-attf-id="{{ this.state.chartId }}"
                     t-attf-style="{{ this.state.subStyle }}"
