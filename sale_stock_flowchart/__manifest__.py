@@ -5,7 +5,7 @@
     "description": "This module enhances the Sale Order by adding a flowchart that visually represents the stock flow, providing a clearer understanding of inventory movements associated with each order.",
     'images': ['static/description/banner.png'],  # 560x280 px
     "category": 'Sales/Sales',
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license": "AGPL-3",
     "author": "HVG Solutions",
     "website": "https://hvg-solutions.com",
