@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -14,10 +15,13 @@ class IrModelField(models.Model):
         compute_sudo=True,
         string='Can Recompute',
         help="Indicates if the field can be recomputed using the recompute button in the model form view.",
-        groups='base.group_no_one'
+        groups='base.group_system'
     )
 
     def recompute_field(self):
+        # Callable through RPC by anyone with write access on ir.model.fields
+        if not self.env.is_system():
+            raise AccessError(_("Only administrators can recompute fields."))
         self.ensure_one()
         model = self.env[self.model_id.model]
         records = model.search([])

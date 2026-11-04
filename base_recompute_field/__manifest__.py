@@ -4,7 +4,7 @@
     'summary': """Recompute Computed Field""",
     'description': """Add a button to recompute computed fields in Odoo fields view.""",
     'category': 'Technical',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'author': "HVG Solutions",
     'website': "https://hvg-solutions.com",
     'license': 'LGPL-3',

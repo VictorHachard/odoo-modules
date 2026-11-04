@@ -9,9 +9,9 @@
 			<field name="arch" type="xml">
 				<xpath expr="//sheet" position="before">
 					<header>
-						<field name="can_recompute" groups="base.group_no_one" invisible="1"/>
+						<field name="can_recompute" groups="base.group_system" invisible="1"/>
 						<button string="Recompute Field" type="object" name="recompute_field"
-                            class="oe_stat_button" icon="fa-refresh" groups="base.group_no_one"
+                            class="oe_stat_button" icon="fa-refresh" groups="base.group_system"
                             invisible="not can_recompute"/>
 					</header>
 				</xpath>
