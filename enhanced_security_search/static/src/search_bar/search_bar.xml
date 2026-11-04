@@ -2,30 +2,32 @@
 <templates xml:space="preserve">
 
     <t t-inherit="web.SearchBar.Facets" t-inherit-mode="extension">
-<!--        <xpath expr="//span[@t-if='facet.domain']" position="attributes">-->
-<!--            <attribute name="t-if">!hideCustomFilter</attribute>-->
-<!--        </xpath>-->
-
         <xpath expr="//div[hasclass('position-absolute')]" position="attributes">
             <attribute name="t-if">!hideCustomFilter</attribute>
         </xpath>
 
+        <!-- Keep the core label and its click handler (guarded in search_bar.js)
+             so the group-by sort toggle still works; only drop the signals of
+             the domain editor: the pencil overlay, the button role and style. -->
         <xpath expr="//div[hasclass('o_searchview_facet_label')]" position="attributes">
-            <attribute name="t-if">!hideCustomFilter</attribute>
+            <attribute name="t-att-role">facet.domain and !hideCustomFilter ? 'button' : 'img'</attribute>
+            <attribute name="t-att-class">{
+                'text-bg-action': facet.type == 'groupBy',
+                'btn': facet.type == 'groupBy' and env.searchModel.canOrderByCount,
+                'btn btn-primary': (facet.type == 'field' || facet.type == 'filter') and !hideCustomFilter,
+                'text-bg-primary': (facet.type == 'field' || facet.type == 'filter') and hideCustomFilter,
+                'btn btn-favourite': facet.type == 'favorite' and !hideCustomFilter,
+                'text-bg-favourite': facet.type == 'favorite' and hideCustomFilter
+            }</attribute>
         </xpath>
-        <xpath expr="//div[hasclass('o_searchview_facet_label')]" position="after">
-            <div class="o_searchview_facet_label position-relative rounded-start-2 px-1"
-                    t-if="hideCustomFilter"
-                    t-att-role="'img'"
-                    t-att-class="{
-                        'text-bg-action d-flex align-items-center': facet.type == 'groupBy' || facet.type == 'comparison',
-                        'text-bg-primary d-flex align-items-center': facet.type == 'field' || facet.type == 'filter',
-                        'text-bg-favourite d-flex align-items-center': facet.type == 'favorite'
-                    }"
-                    >
-                    <i t-if="facet.icon" class="small text-white fa-fw" t-att-class="facet.icon" role="image"/>
-                    <small t-else="" class="px-1" t-esc="facet.title"/>
-                </div>
+        <xpath expr="//span[@t-if='facet.domain']" position="attributes">
+            <attribute name="t-if">facet.domain and !hideCustomFilter</attribute>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.SearchBar.QuickSearchItems" t-inherit-mode="extension">
+        <xpath expr="//DropdownItem" position="attributes">
+            <attribute name="t-if">!hideCustomFilter or !item.isAddCustomFilterButton</attribute>
         </xpath>
     </t>
 

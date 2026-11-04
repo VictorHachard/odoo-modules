@@ -18,11 +18,21 @@ patch(SearchBar.prototype, {
     get hideCustomFilter() {
         return this.hasCustomGroup || false;
     },
-    onFacetLabelClick(target, facet) {
-        if (this.hasCustomGroup) {
+    selectItem(item) {
+        // The "Custom Filter..." entry of the autocomplete is hidden in the
+        // template; refuse it here too, so no keyboard path opens the dialog.
+        if (this.hideCustomFilter && item?.isAddCustomFilterButton) {
             return;
-        } else {
-            super.onFacetLabelClick(target, facet);
         }
+        return super.selectItem(...arguments);
+    },
+    onFacetLabelClick(target, facet) {
+        // Core's handler toggles the group-by sort order, and only otherwise
+        // opens the domain editor: withhold the domain editor alone.
+        const sortsGroupBy = this.env.searchModel.canOrderByCount && facet.type === "groupBy";
+        if (this.hideCustomFilter && !sortsGroupBy) {
+            return;
+        }
+        return super.onFacetLabelClick(target, facet);
     }
 });

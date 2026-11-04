@@ -5,7 +5,7 @@
     'description': """This module allows to manage access to custom filters, custom group by through user group assignments.""",
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'author': "HVG Solutions",
     'website': "https://hvg-solutions.com",
     'license': 'LGPL-3',
@@ -19,7 +19,10 @@
         'web.assets_backend': [
             'enhanced_security_search/static/src/*/*.xml',
             'enhanced_security_search/static/src/*/*.js',
-        ]
+        ],
+        'web.assets_unit_tests': [
+            'enhanced_security_search/static/tests/**/*.js',
+        ],
     },
     'installable': True,
     'application': False,
