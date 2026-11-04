@@ -6,7 +6,8 @@
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
     'version': '0.0.2',
-    'author': "Victor",
+    'author': "HVG Solutions",
+    'website': "https://hvg-solutions.com",
     'license': 'LGPL-3',
     'price': 0,
     'currency': 'EUR',
