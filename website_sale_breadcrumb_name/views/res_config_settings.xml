@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.website.sale.breadcrumb.name</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='hide_add_to_cart_setting']" position="after">
+                <setting id="breadcrumb_name_setting"
+                         string="Display Breadcrumb Name"
+                         help="Breadcrumb Name displayed on product page.">
+                    <field name="breadcrumb_name" placeholder="All products"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

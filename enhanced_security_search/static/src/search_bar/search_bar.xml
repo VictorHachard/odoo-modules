@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
-    <t t-inherit="web.SearchBar.Facets" t-inherit-mode="extension">
-<!--        <xpath expr="//span[@t-if='facet.domain']" position="attributes">-->
-<!--            <attribute name="t-if">!hideCustomFilter</attribute>-->
-<!--        </xpath>-->
+    <!-- Only the domain editor is withheld. The facet label keeps its click
+         handler (guarded in search_bar.js) and the sort overlay right after the
+         edit one, which belongs to the group-by sort and has nothing to do with
+         custom filters. This override used to replace the whole label div with
+         a copy, which dropped the sort affordance with it and made the loss
+         silent.
 
-        <xpath expr="//div[hasclass('position-absolute')]" position="attributes">
-            <attribute name="t-if">!hideCustomFilter</attribute>
+         Odoo 20 moved the label out of web.SearchBar.Facets and into
+         web.SearchBar.NormalFacetIcon, so that is what is inherited now. The
+         three attributes below only remove the "this opens something" signals
+         of the edit path: the overlay itself, the button role and the label
+         styling. The group-by sort keeps all three. -->
+    <t t-inherit="web.SearchBar.NormalFacetIcon" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('o_facet_overlay')]" position="attributes">
+            <attribute name="t-if">facet.domain and !this.hideCustomFilter</attribute>
         </xpath>
-
         <xpath expr="//div[hasclass('o_searchview_facet_label')]" position="attributes">
-            <attribute name="t-if">!hideCustomFilter</attribute>
+            <attribute name="t-att-role">facet.domain and !this.hideCustomFilter ? 'button' : 'img'</attribute>
+            <attribute name="t-att-class">{
+                'o_facet_groupby': facet.type == 'groupBy',
+                'bg-primary-subtle text-primary': (facet.type == 'field' || facet.type == 'filter') and !this.hideCustomFilter,
+                'text-bg-primary': (facet.type == 'field' || facet.type == 'filter') and this.hideCustomFilter,
+                'o_facet_favorite': facet.type == 'favorite'
+            }</attribute>
         </xpath>
-        <xpath expr="//div[hasclass('o_searchview_facet_label')]" position="after">
-            <div class="o_searchview_facet_label position-relative rounded-start-2 px-1"
-                    t-if="hideCustomFilter"
-                    t-att-role="'img'"
-                    t-att-class="{
-                        'text-bg-action d-flex align-items-center': facet.type == 'groupBy' || facet.type == 'comparison',
-                        'text-bg-primary d-flex align-items-center': facet.type == 'field' || facet.type == 'filter',
-                        'text-bg-favourite d-flex align-items-center': facet.type == 'favorite'
-                    }"
-                    >
-                    <i t-if="facet.icon" class="small text-white fa-fw" t-att-class="facet.icon" role="image"/>
-                    <small t-else="" class="px-1" t-esc="facet.title"/>
-                </div>
+    </t>
+
+    <t t-inherit="web.SearchBar.QuickSearchItems" t-inherit-mode="extension">
+        <xpath expr="//DropdownItem" position="attributes">
+            <attribute name="t-if">!this.hideCustomFilter or !item.isAddCustomFilterButton</attribute>
         </xpath>
     </t>
 

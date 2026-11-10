@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Website Breadcumb Custom',
+    'summary': 'Update the breadcrumb name of the website product page',
+    'description': 'Update the breadcrumb name of the website product page',
+    'images': ['static/description/banner.jpg'],  # 560x280 px
+    'category': 'Website/Website',
+    'version': '0.1.0',
+    'license': 'AGPL-3',
+    'author': 'HVG Solutions',
+    'website': 'https://hvg-solutions.com',
+    'price': 0,
+    'currency': 'EUR',
+    'depends': ['website_sale'],
+    'data': [
+        'views/res_config_settings.xml',
+        'views/website_template.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

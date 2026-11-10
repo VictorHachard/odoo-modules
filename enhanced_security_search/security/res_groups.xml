@@ -7,16 +7,30 @@
             <field name="sequence">99</field>
         </record>
 
+        <!-- `implied_by_ids` is the reverse of `implied_ids`, on the same m2m
+             table: this links the group into `base.default_user_group`, whose
+             implied groups `res.users._default_groups()` copies into `group_ids`
+             when an internal user is created. Nobody is a *member* of
+             `base.default_user_group`, so the copy is a plain membership that
+             can be taken away from a single user; that is what makes the group
+             an opt-out rather than something nobody can ever lose.
+
+             Written here, on our own record, rather than as
+             `<record id="base.default_user_group">`: that record lives in a
+             `noupdate="1"` block of `base`, so a write to it is silently dropped
+             on every module update (orm/models.py, `if not (update and
+             d_noupdate)`). This side of the relation re-applies on each update.
+
+             The install-time half of the same policy is `_post_init` in
+             `__init__.py`, which grants the group to the internal users that
+             already exist. Keep the two in step: granting on one side only is
+             how this module ended up open for everybody hired before install and
+             shut for everybody hired after. -->
         <record id="group_custom_search" model="res.groups">
             <field name="name">Enable Custom Search</field>
             <field name="privilege_id" ref="enhanced_security_search.res_groups_privilege_website"/>
+            <field name="implied_by_ids" eval="[Command.link(ref('base.default_user_group'))]"/>
         </record>
-
-<!--        <record id="base.default_user_group" model="res.groups">-->
-<!--            <field name="implied_ids" eval="[-->
-<!--                Command.link(ref('group_custom_search'))-->
-<!--            ]"/>-->
-<!--        </record>-->
 
     </data>
 </odoo>

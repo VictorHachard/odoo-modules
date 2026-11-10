@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web_widget_image_field.Many2OneImageField">
+        <div class="d-flex align-items-center gap-1" t-att-data-tooltip="this.value?.display_name">
+            <span class="o_avatar o_m2o_avatar">
+                <img t-if="this.value"
+                     t-att-src="this.imageUrl"
+                     class="rounded"
+                     loading="lazy"
+                     alt=""
+                     style="cursor: auto;"
+                />
+            </span>
+            <Many2One t-props="this.m2oProps" cssClass="'w-100'"/>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="group_partner_icon_type_detailed" model="res.groups">
+            <field name="name">Display Detailed Contact Icons</field>
+        </record>
+
+    </data>
+</odoo>

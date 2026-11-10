@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* enhanced_security_search
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-30 20:45+0000\n"
+"PO-Revision-Date: 2026-09-30 20:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,name:enhanced_security_search.res_groups_privilege_website
+msgid "Custom Search"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__display_name model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:res.groups,name:enhanced_security_search.group_custom_search
+msgid "Enable Custom Search"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.module.module,shortdesc:base.module_enhanced_security_search
+msgid "Enhanced Security Custom Search"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_filters
+msgid "Filter"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_http
+msgid "HTTP Routing"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.module.module,summary:base.module_enhanced_security_search
+msgid "Hides the ad-hoc search controls from users outside a dedicated group."
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__id model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__id
+msgid "ID"
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,placeholder:enhanced_security_search.res_groups_privilege_website
+msgid "No"
+msgstr ""
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "You are not allowed to manage custom search filters."
+msgstr ""
+
+#. module: enhanced_security_search
+#: model:ir.module.module,description:base.module_enhanced_security_search
+msgid ""
+"\n"
+"Enhanced Security Custom Search\n"
+"===============================\n"
+"\n"
+"Adds a group, \"Enable Custom Search\", and hides the ad-hoc search controls from\n"
+"every user who is not in it: the \"Custom Filter...\" and \"Custom Date...\" entries\n"
+"of the search panel (and the \"Custom Filter...\" of the search autocomplete), the\n"
+"\"Add Custom Group\" entry of the search panel and of the pivot header, the pencil\n"
+"that opens the domain editor on a search facet, and \"Save current search\" in the\n"
+"Favorites column.\n"
+"\n"
+"Every internal user holds the group by default (existing users at install, new\n"
+"users through the default user template); remove it from the users who should\n"
+"only use the predefined filters.\n"
+"\n"
+"Scope, stated plainly: this is a user interface simplification, not an access\n"
+"control over data. The one server-side rule it adds is on ir.filters\n"
+"create / write / unlink, so saving, renaming and deleting a favourite really is\n"
+"refused for a user outside the group, and a filter shared with other users can\n"
+"only be changed or deleted by its author or an administrator. Applying a domain\n"
+"or a group-by is not gated, and cannot be: the web client sends the domain and\n"
+"the groupby list straight to the read RPC on every screen it opens, and the\n"
+"server has no way to tell a domain the search view produced from a domain a\n"
+"user typed. Record rules and model access rights remain the only fence around\n"
+"the data itself.\n"
+msgstr ""
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "This search filter is shared with other users and was created by someone else. Only its author or an administrator can change or delete it."
+msgstr ""

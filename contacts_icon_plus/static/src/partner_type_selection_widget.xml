@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Read-only widget: an icon whose tooltip is the selection label -->
+    <t t-name="contacts_icon_plus.PartnerIconTypeField">
+        <span t-if="this.iconClass" class="o_partner_icon_type">
+            <i t-att-class="'fa fa-fw ' + this.iconClass" t-att-data-tooltip="this.title"
+               t-att-aria-label="this.title" role="img"/>
+        </span>
+    </t>
+
+</templates>

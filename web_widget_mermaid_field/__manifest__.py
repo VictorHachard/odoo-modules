@@ -1,25 +1,29 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Mermaid Widget",
-    "summary": "Add Mermaid Diagrams to Odoo",
-    "description": "Add the Mermaid.js library to Odoo and create a widget to display Mermaid diagrams in Odoo views.",
-    "images": ['static/description/banner.png'],  # 560x280 px
-    "category": "Technical",
-    "version": "0.0.1",
-    "author": "Victor",
-    "license": 'LGPL-3',
-    "price": 0,
-    "currency": 'EUR',
-    "depends": ["web"],
-    "assets": {
-        "web.assets_backend": [
-            "web_widget_mermaid_field/static/src/js/web_widget_mermaid.js",
-            "web_widget_mermaid_field/static/src/xml/mermaid_field.xml",
+    'name': 'Mermaid Widget',
+    'summary': 'Add Mermaid Diagrams to Odoo',
+    'description': 'Add the Mermaid.js library to Odoo and create a widget to display Mermaid diagrams in Odoo views.',
+    'images': ['static/description/banner.png'],  # 560x280 px
+    'category': 'Technical',
+    'version': '0.1.0',
+    'author': 'HVG Solutions',
+    'website': 'https://hvg-solutions.com',
+    'license': 'LGPL-3',
+    'price': 0,
+    'currency': 'EUR',
+    'depends': ['web'],
+    'assets': {
+        'web.assets_backend': [
+            'web_widget_mermaid_field/static/src/js/web_widget_mermaid.js',
+            'web_widget_mermaid_field/static/src/xml/mermaid_field.xml',
         ],
-        "web_widget_mermaid_field.mermaid_lib": [
-            "/web_widget_mermaid_field/static/src/js/mermaid_10_9_1.js",
+        'web_widget_mermaid_field.mermaid_lib': [
+            'web_widget_mermaid_field/static/src/js/mermaid_10_9_1.js',
+        ],
+        'web.assets_unit_tests': [
+            'web_widget_mermaid_field/static/tests/**/*.js',
         ],
     },
-    "installable": True,
+    'installable': True,
     'application': False,
 }

@@ -1,0 +1,120 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contacts_icon_plus
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-08 19:18+0000\n"
+"PO-Revision-Date: 2023-09-08 19:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__company
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection_easy__company
+#, python-format
+msgid "Company"
+msgstr "Société"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model,name:contacts_icon_plus.model_res_partner
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__contact
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection_easy__contact
+#: model_terms:ir.ui.view,arch_db:contacts_icon_plus.cip_res_partner_search_view_inherit
+#, python-format
+msgid "Contact"
+msgstr ""
+
+#. module: contacts_icon_plus
+#: model:ir.model.fields,field_description:contacts_icon_plus.field_res_partner__icon_type_selection
+#: model:ir.model.fields,field_description:contacts_icon_plus.field_res_users__icon_type_selection
+msgid "Contact type"
+msgstr "Type de contact"
+
+#. module: contacts_icon_plus
+#: model:ir.model.fields,field_description:contacts_icon_plus.field_res_partner__icon_type_selection_easy
+#: model:ir.model.fields,field_description:contacts_icon_plus.field_res_users__icon_type_selection_easy
+msgid "Contact type easy"
+msgstr "Type de contact facile"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__delivery
+#, python-format
+msgid "Delivery Address"
+msgstr "Adresse de livraison"
+
+#. module: contacts_icon_plus
+#: model:ir.model.fields,field_description:contacts_icon_plus.field_res_users__partner_icon_type_detailed
+#: model:res.groups,name:contacts_icon_plus.group_partner_icon_type_detailed
+msgid "Show Contact Icons"
+msgstr "Afficher les icônes de contact"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__employee
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection_easy__employee
+#: model_terms:ir.ui.view,arch_db:contacts_icon_plus.cip_res_partner_search_view_inherit
+#, python-format
+msgid "Employee"
+msgstr "Employé"
+
+#. module: contacts_icon_plus
+#: model:ir.model.fields,help:contacts_icon_plus.field_res_users__partner_icon_type_detailed
+msgid "Enable this option to display detailed icons for contacts"
+msgstr "Activez cette option pour afficher des icônes détaillées pour les contacts"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__individual
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection_easy__individual
+#, python-format
+msgid "Individual"
+msgstr "Particulier"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__invoice
+#, python-format
+msgid "Invoice Address"
+msgstr "Adresse de facturation"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__other
+#, python-format
+msgid "Other Address"
+msgstr "Autre adresse"
+
+#. module: contacts_icon_plus
+#. odoo-javascript
+#: code:addons/contacts_icon_plus/static/src/js/partner_type_selection_widget.js:0
+#: model:ir.model.fields.selection,name:contacts_icon_plus.selection__res_partner__icon_type_selection__private
+#, python-format
+msgid "Private Address"
+msgstr "Adresse personnelle"
+
+#. module: contacts_icon_plus
+#: model_terms:ir.ui.view,arch_db:contacts_icon_plus.cip_res_partner_search_view_inherit
+msgid "Type"
+msgstr ""
+
+#. module: contacts_icon_plus
+#: model:ir.model,name:contacts_icon_plus.model_res_users
+msgid "User"
+msgstr "Utilisateur"

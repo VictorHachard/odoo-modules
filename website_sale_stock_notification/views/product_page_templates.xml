@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="cta_wrapper" name="CTA Wrapper (back in stock notification toggle)"
+              inherit_id="website_sale.cta_wrapper">
+        <div id="out_of_stock_buttons_wrapper" position="attributes">
+            <attribute name="t-if">combination_info.get('is_storable') and product.out_of_stock_back_in_stock_message</attribute>
+        </div>
+        <div id="stock_notification_wrapper" position="attributes">
+            <attribute name="t-if">product.out_of_stock_back_in_stock_message</attribute>
+        </div>
+    </template>
+
+</odoo>

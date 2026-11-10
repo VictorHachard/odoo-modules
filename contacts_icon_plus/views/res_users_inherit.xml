@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cip_res_users_preferences_form_view_inherit" model="ir.ui.view">
+        <field name="name">cip.res.users.preferences.form.view.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='other_preferences']" position="inside">
+                <field name="partner_icon_type_detailed" readonly="0"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="cip_res_users_form_view_inherit" model="ir.ui.view">
+        <field name="name">cip.res.users.form.view.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='other_preferences']" position="inside">
+                <field name="partner_icon_type_detailed" invisible="share"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

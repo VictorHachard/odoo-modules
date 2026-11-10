@@ -1,0 +1,6 @@
+// Keep the icon column narrow and centred in list views
+.o_list_renderer td:has(> .o_field_partner_icon_type, > .o_field_partner_icon_type_all) {
+    min-width: 24px;
+    width: 24px;
+    text-align: center;
+}

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, models, fields, _
-from odoo.api import NewId
+from odoo import api, fields, models
+
+from odoo.addons.stock_flowchart.tools import mermaid_click, mermaid_label, mermaid_node_id
 
 
 class PurchaseOrder(models.Model):
@@ -9,33 +10,39 @@ class PurchaseOrder(models.Model):
 
     flowchart = fields.Text('Flowchart', compute='_compute_flowchart')
 
-    @api.depends('state', 'picking_ids.state', 'picking_ids.backorder_id', 'picking_ids.backorder_ids')
+    @api.depends(
+        'name', 'state', 'partner_id',
+        'picking_ids.name', 'picking_ids.state', 'picking_ids.backorder_id', 'picking_ids.backorder_ids',
+    )
     def _compute_flowchart(self):
+        i18n = self._get_flowchart_i18n()
+        picking_i18n = self.env['stock.picking']._get_flowchart_i18n()
         for rec in self:
-            flowchart = [
+            rec.flowchart = '\n'.join([
                 'graph TB',
                 rec._get_flowchart_style(),
-                rec._get_purchase_picking_flowchart_graph()
-            ]
-            rec.flowchart = '\n'.join(flowchart)
+                rec._get_purchase_picking_flowchart_graph(i18n=i18n, picking_i18n=picking_i18n),
+            ])
 
-    def _get_purchase_picking_flowchart_graph(self, more_info=False):
+    def _get_purchase_picking_flowchart_graph(self, more_info=False, i18n=None, picking_i18n=None):
         self.ensure_one()
-        flowchart = [
-            self._get_flowchart_element(more_info=more_info),
-            self._get_flowchart_click()
-        ]
-        i18n, menu_id = None, None
-        if self.picking_ids:
-            i18n = dict(self.env['stock.picking'].fields_get(allfields=['state'])['state']['selection'])
-            menu_id = self.env.ref('stock.menu_stock_root').id
+        node_id = self._get_flowchart_node_id()
+        flowchart = [self._get_flowchart_element(i18n=i18n, more_info=more_info)]
+        click = self._get_flowchart_click()
+        if click:
+            flowchart.append(click)
+        if self.picking_ids and not picking_i18n:
+            picking_i18n = self.env['stock.picking']._get_flowchart_i18n()
         for hierarchy in self.picking_ids._get_picking_hierarchy():
+            root = hierarchy[0]
             if len(hierarchy) > 1:
-                flowchart.append(hierarchy[0]._get_flowchart_sub_graph(i18n, menu_id))
-                flowchart.append(f'po{self.id} --> sub{hierarchy[0].id}')
-            elif len(hierarchy) == 1:
-                flowchart.append(f'po{self.id} --> {hierarchy[0]._get_flowchart_element(i18n)}')
-                flowchart.append(hierarchy[0]._get_flowchart_click(menu_id))
+                flowchart.append(root._get_flowchart_sub_graph(picking_i18n))
+                flowchart.append(f'{node_id} --> sub{root._get_flowchart_node_id()}')
+            else:
+                flowchart.append(f'{node_id} --> {root._get_flowchart_element(picking_i18n)}')
+                click = root._get_flowchart_click()
+                if click:
+                    flowchart.append(click)
         return '\n'.join(flowchart)
 
     def _get_flowchart_style(self):
@@ -53,25 +60,24 @@ class PurchaseOrder(models.Model):
             'sent': 'bg-info-light',
             'to approve': 'bg-info-light',
             'purchase': 'bg-success-light',
-            'done': 'bg-success-light',
             'cancel': 'bg-danger-light',
         }
 
     def _get_flowchart_i18n(self):
         return dict(self.env[self._name].fields_get(allfields=['state'])['state']['selection'])
 
+    def _get_flowchart_node_id(self):
+        return mermaid_node_id('po', self)
+
     def _get_flowchart_element(self, i18n=None, more_info=False):
         self.ensure_one()
         if not i18n:
             i18n = self._get_flowchart_i18n()
-        state = self._get_flowchart_state_color().get(self.state)
-        if more_info:
-            return f'po{self.id}("{self.name} - {_(i18n[self.state])}\n{self.partner_id.display_name}"):::{state}'
-        return f'po{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
+        state_class = self._get_flowchart_state_color().get(self.state, 'bg-grey-light')
+        title = f"{self.name or '/'} - {i18n.get(self.state, self.state or '')}"
+        label = mermaid_label(title, self.partner_id.display_name) if more_info else mermaid_label(title)
+        return f'{self._get_flowchart_node_id()}({label}):::{state_class}'
 
-    def _get_flowchart_click(self, menu_id=None):
+    def _get_flowchart_click(self):
         self.ensure_one()
-        if not menu_id:
-            menu_id = self.env.ref('purchase.menu_purchase_root').id
-        _id = self._origin.id if isinstance(self.id, NewId) else self.id
-        return f'click po{self.id} "/web#id={_id}&model=purchase.order&view_type=form&menu_id={menu_id}" _blank'
+        return mermaid_click('po', self)

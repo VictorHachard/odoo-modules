@@ -1,0 +1,30 @@
+name: Set up Odoo
+description: Check out Odoo at $ODOO_REF and install its Python dependencies.
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: odoo/odoo
+        ref: ${{ env.ODOO_REF }}
+        path: odoo
+        fetch-depth: 1
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: pip
+        cache-dependency-path: odoo/requirements.txt
+    - name: System packages
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          libldap2-dev libsasl2-dev libpq-dev libxml2-dev libxslt1-dev \
+          libjpeg-dev zlib1g-dev postgresql-client
+    - name: Python dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip wheel
+        pip install -r odoo/requirements.txt
+        # Drives headless Chrome for HttpCase and the Hoot suites.
+        pip install websocket-client

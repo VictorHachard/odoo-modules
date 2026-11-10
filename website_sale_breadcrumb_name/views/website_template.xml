@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="all_products_link_name" name="All Products name (custom breadcrumb)"
+              inherit_id="website_sale.all_products_link_name">
+        <xpath expr="//span" position="attributes">
+            <attribute name="t-if">not website.breadcrumb_name</attribute>
+        </xpath>
+        <xpath expr="//span" position="after">
+            <span t-else="" t-out="website.breadcrumb_name"/>
+        </xpath>
+    </template>
+
+</odoo>

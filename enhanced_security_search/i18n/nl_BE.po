@@ -1,0 +1,129 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* enhanced_security_search
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-09 07:48+0000\n"
+"PO-Revision-Date: 2026-10-09 07:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,name:enhanced_security_search.res_groups_privilege_website
+msgid "Custom Search"
+msgstr "Aangepaste zoekopdracht"
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__display_name model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__display_name
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#. module: enhanced_security_search
+#: model:res.groups,name:enhanced_security_search.group_custom_search
+msgid "Enable Custom Search"
+msgstr "Aangepaste zoekopdracht inschakelen"
+
+#. module: enhanced_security_search
+#: model:ir.module.module,shortdesc:base.module_enhanced_security_search
+msgid "Enhanced Security Custom Search"
+msgstr "Verbeterde beveiliging voor aangepast zoeken"
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_filters
+msgid "Filter"
+msgstr "Filter"
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_http
+msgid "HTTP Routing"
+msgstr "HTTP routing"
+
+#. module: enhanced_security_search
+#: model:ir.module.module,summary:base.module_enhanced_security_search
+msgid "Hides the ad-hoc search controls from users outside a dedicated group."
+msgstr "Verbergt de ad-hoc zoekbedieningen voor gebruikers buiten een specifieke groep."
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__id model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__id
+msgid "ID"
+msgstr "ID"
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,placeholder:enhanced_security_search.res_groups_privilege_website
+msgid "No"
+msgstr "Nee"
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "You are not allowed to manage custom search filters."
+msgstr "U mag geen aangepaste zoekfilters beheren."
+
+#. module: enhanced_security_search
+#: model:ir.module.module,description:base.module_enhanced_security_search
+msgid ""
+"\n"
+"Enhanced Security Custom Search\n"
+"===============================\n"
+"\n"
+"Adds a group, \"Enable Custom Search\", and hides the ad-hoc search controls from\n"
+"every user who is not in it: the \"Custom Filter...\" and \"Custom Date...\" entries\n"
+"of the search panel (and the \"Custom Filter...\" of the search autocomplete), the\n"
+"\"Add Custom Group\" entry of the search panel and of the pivot header, the pencil\n"
+"that opens the domain editor on a search facet, and \"Save current search\" in the\n"
+"Favorites column.\n"
+"\n"
+"Every internal user holds the group by default (existing users at install, new\n"
+"users through the default user template); remove it from the users who should\n"
+"only use the predefined filters.\n"
+"\n"
+"Scope, stated plainly: this is a user interface simplification, not an access\n"
+"control over data. The one server-side rule it adds is on ir.filters\n"
+"create / write / unlink, so saving, renaming and deleting a favourite really is\n"
+"refused for a user outside the group, and a filter shared with other users can\n"
+"only be changed or deleted by its author or an administrator. Applying a domain\n"
+"or a group-by is not gated, and cannot be: the web client sends the domain and\n"
+"the groupby list straight to the read RPC on every screen it opens, and the\n"
+"server has no way to tell a domain the search view produced from a domain a\n"
+"user typed. Record rules and model access rights remain the only fence around\n"
+"the data itself.\n"
+msgstr ""
+"\n"
+"Beveiligde aangepaste zoekopdrachten\n"
+"====================================\n"
+"\n"
+"Voegt een groep \"Aangepast zoeken inschakelen\" toe en verbergt de ad-hoc\n"
+"zoekfuncties voor elke gebruiker die er geen lid van is: de items \"Aangepaste\n"
+"filter...\" en \"Aangepaste datum...\" van het zoekpaneel (en de \"Aangepaste\n"
+"filter...\" van de automatische aanvulling), \"Aangepaste groep toevoegen\" in het\n"
+"zoekpaneel en in de kop van de draaitabel, het potlood dat de domeineditor op een\n"
+"zoekfacet opent, en \"Huidige zoekopdracht opslaan\" in de kolom Favorieten.\n"
+"\n"
+"Alle interne gebruikers hebben de groep standaard (bestaande gebruikers bij de\n"
+"installatie, nieuwe via de standaardgebruikerssjabloon); verwijder hem bij de\n"
+"gebruikers die alleen de vooraf gedefinieerde filters mogen gebruiken.\n"
+"\n"
+"Duidelijk gezegd: dit is een vereenvoudiging van de gebruikersinterface, geen\n"
+"toegangscontrole op gegevens. De enige regel aan de serverkant betreft het\n"
+"aanmaken, wijzigen en verwijderen van ir.filters: een favoriet opslaan, hernoemen\n"
+"en verwijderen wordt echt geweigerd voor een gebruiker buiten de groep, en een\n"
+"filter die met andere gebruikers gedeeld is kan alleen door de auteur of een\n"
+"beheerder worden gewijzigd of verwijderd. Een domein of groepering toepassen wordt\n"
+"niet beperkt, en kan ook niet: de webclient stuurt het domein en de groeperingen\n"
+"rechtstreeks naar de lees-RPC van elk scherm, en de server kan een domein van de\n"
+"zoekweergave niet onderscheiden van een domein dat de gebruiker typte.\n"
+"Recordregels en toegangsrechten blijven de enige bescherming van de gegevens zelf.\n"
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "This search filter is shared with other users and was created by someone else. Only its author or an administrator can change or delete it."
+msgstr "Deze zoekfilter is gedeeld met andere gebruikers en is door iemand anders aangemaakt. Alleen de auteur of een beheerder kan hem wijzigen of verwijderen."

@@ -4,23 +4,128 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20240118\n"
+"Project-Id-Version: Odoo Server 20.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-22 17:30+0000\n"
 "PO-Revision-Date: 2024-01-22 17:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: enhanced_security_search
-#: model:res.groups,name:enhanced_security_search.group_custom_favorite_share
-msgid "Enable Custom Favorite Share"
-msgstr "Activer le partage de favoris"
-
-#. module: enhanced_security_search
 #: model:res.groups,name:enhanced_security_search.group_custom_search
 msgid "Enable Custom Search"
 msgstr "Activer la recherche personnalisée"
+
+#. module: enhanced_security_search
+#: model:ir.module.module,description:base.module_enhanced_security_search
+msgid ""
+"\n"
+"Enhanced Security Custom Search\n"
+"===============================\n"
+"\n"
+"Adds a group, \"Enable Custom Search\", and hides the ad-hoc search controls from\n"
+"every user who is not in it: the \"Custom Filter...\" and \"Custom Date...\" entries\n"
+"of the search panel (and the \"Custom Filter...\" of the search autocomplete), the\n"
+"\"Add Custom Group\" entry of the search panel and of the pivot header, the pencil\n"
+"that opens the domain editor on a search facet, and \"Save current search\" in the\n"
+"Favorites column.\n"
+"\n"
+"Every internal user holds the group by default (existing users at install, new\n"
+"users through the default user template); remove it from the users who should\n"
+"only use the predefined filters.\n"
+"\n"
+"Scope, stated plainly: this is a user interface simplification, not an access\n"
+"control over data. The one server-side rule it adds is on ir.filters\n"
+"create / write / unlink, so saving, renaming and deleting a favourite really is\n"
+"refused for a user outside the group, and a filter shared with other users can\n"
+"only be changed or deleted by its author or an administrator. Applying a domain\n"
+"or a group-by is not gated, and cannot be: the web client sends the domain and\n"
+"the groupby list straight to the read RPC on every screen it opens, and the\n"
+"server has no way to tell a domain the search view produced from a domain a\n"
+"user typed. Record rules and model access rights remain the only fence around\n"
+"the data itself.\n"
+msgstr ""
+"\n"
+"Recherche personnalisée sécurisée\n"
+"=================================\n"
+"\n"
+"Ajoute un groupe, \"Activer la recherche personnalisée\", et masque les contrôles\n"
+"de recherche ad hoc à tout utilisateur qui n'en fait pas partie : les entrées\n"
+"\"Filtre personnalisé...\" et \"Date personnalisée...\" du panneau de recherche (et\n"
+"le \"Filtre personnalisé...\" de l'autocomplétion), l'entrée \"Ajouter un\n"
+"regroupement personnalisé\" du panneau de recherche et de l'en-tête du tableau\n"
+"croisé, le crayon qui ouvre l'éditeur de domaine sur une facette de recherche, et\n"
+"\"Sauvegarder la recherche actuelle\" dans la colonne Favoris.\n"
+"\n"
+"Tous les utilisateurs internes ont le groupe par défaut (les utilisateurs\n"
+"existants à l'installation, les nouveaux via le modèle d'utilisateur par défaut) ;\n"
+"retirez-le aux utilisateurs qui ne doivent utiliser que les filtres prédéfinis.\n"
+"\n"
+"La portée, dite clairement : il s'agit d'une simplification de l'interface, pas\n"
+"d'un contrôle d'accès aux données. La seule règle côté serveur qu'il ajoute porte\n"
+"sur la création, l'écriture et la suppression d'ir.filters : enregistrer, renommer\n"
+"et supprimer un favori est réellement refusé à un utilisateur hors du groupe, et\n"
+"un filtre partagé avec d'autres utilisateurs ne peut être modifié ou supprimé que\n"
+"par son auteur ou un administrateur. Appliquer un domaine ou un regroupement n'est\n"
+"pas contrôlé, et ne peut pas l'être : le client web envoie le domaine et la liste\n"
+"des regroupements directement au RPC de lecture sur chaque écran qu'il ouvre, et\n"
+"le serveur n'a aucun moyen de distinguer un domaine produit par la vue de\n"
+"recherche d'un domaine saisi par un utilisateur. Les règles d'enregistrement et\n"
+"les droits d'accès aux modèles restent la seule barrière autour des données.\n"
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,name:enhanced_security_search.res_groups_privilege_website
+msgid "Custom Search"
+msgstr "Recherche personnalisée"
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__display_name model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: enhanced_security_search
+#: model:ir.module.module,shortdesc:base.module_enhanced_security_search
+msgid "Enhanced Security Custom Search"
+msgstr "Recherche personnalisée sécurisée"
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_filters
+msgid "Filter"
+msgstr "Filtre"
+
+#. module: enhanced_security_search
+#: model:ir.model,name:enhanced_security_search.model_ir_http
+msgid "HTTP Routing"
+msgstr "Routage HTTP"
+
+#. module: enhanced_security_search
+#: model:ir.module.module,summary:base.module_enhanced_security_search
+msgid "Hides the ad-hoc search controls from users outside a dedicated group."
+msgstr "Masque les contrôles de recherche ad hoc aux utilisateurs hors d'un groupe dédié."
+
+#. module: enhanced_security_search
+#: model:ir.model.fields,field_description:enhanced_security_search.field_ir_filters__id model:ir.model.fields,field_description:enhanced_security_search.field_ir_http__id
+msgid "ID"
+msgstr "ID"
+
+#. module: enhanced_security_search
+#: model:res.groups.privilege,placeholder:enhanced_security_search.res_groups_privilege_website
+msgid "No"
+msgstr "Non"
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "This search filter is shared with other users and was created by someone else. Only its author or an administrator can change or delete it."
+msgstr "Ce filtre de recherche est partagé avec d'autres utilisateurs et a été créé par quelqu'un d'autre. Seul son auteur ou un administrateur peut le modifier ou le supprimer."
+
+#. module: enhanced_security_search
+#. odoo-python
+#: code:addons/enhanced_security_search/models/ir_filters.py:0
+msgid "You are not allowed to manage custom search filters."
+msgstr "Vous n'êtes pas autorisé à gérer les filtres de recherche personnalisés."

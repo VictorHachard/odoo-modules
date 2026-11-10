@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Border and Center - Tree View",
-    'summary': "Add border and center text tree view",
-    'description': "This module add border and center text in tree view",
+    'name': 'Border and Center - Tree View',
+    'summary': 'Add border and center text tree view',
+    'description': 'This module add border and center text in tree view',
     'images': ['static/description/banner.png'],  # 560x280 px
     'category': 'Technical',
-    'version': '0.0.2',
-    'author': "Victor",
+    'version': '0.1.0',
+    'author': 'HVG Solutions',
+    'website': 'https://hvg-solutions.com',
     'license': 'LGPL-3',
     'price': 0,
     'currency': 'EUR',
@@ -14,7 +15,7 @@
     'data': [],
     'assets': {
         'web.assets_backend': [
-            'tree_style_border_center/static/src/*.scss',
+            'tree_style_border_center/static/src/style.scss',
         ]
     },
     'installable': True,

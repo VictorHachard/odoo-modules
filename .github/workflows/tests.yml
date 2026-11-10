@@ -1,0 +1,108 @@
+name: Tests
+
+on:
+  push:
+    branches: ["20.0"]
+  pull_request:
+    branches: ["20.0"]
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ODOO_REF: "20.0"
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: python .github/scripts/lint.py
+      - id: matrix
+        run: python .github/scripts/matrix.py
+
+  module:
+    # One job per module, on its own database: the install pulls only what the
+    # manifest declares, so a missing `depends` fails here even when another
+    # module of the repository would have brought it in.
+    name: ${{ matrix.module }}
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.lint.outputs.matrix) }}
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U odoo"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: modules
+      - uses: ./modules/.github/actions/setup-odoo
+      - name: Install and test
+        # The module tag also runs its Hoot suites: WebSuite and MobileWebSuite
+        # are CrossModule tests in Odoo 20, filtered on the tagged modules.
+        run: bash modules/.github/scripts/run_odoo.sh "${{ matrix.module }}" "/${{ matrix.module }}"
+      - name: Keep the log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odoo-log-${{ matrix.module }}
+          path: odoo.log
+          retention-days: 7
+
+  all-together:
+    # Every module on one database: catches two modules of this repository
+    # fighting over the same view, field or asset.
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U odoo"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: modules
+      - uses: ./modules/.github/actions/setup-odoo
+      - name: Install and test
+        run: |
+          modules=$(cd modules && ls -d */ | sed 's#/##' | while read m; do [ -f "$m/__manifest__.py" ] && echo "$m"; done | paste -sd, -)
+          tags=$(echo "$modules" | sed 's/[^,]*/\/&/g')
+          bash modules/.github/scripts/run_odoo.sh "$modules" "$tags"
+      - name: Keep the log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odoo-log-all
+          path: odoo.log
+          retention-days: 7

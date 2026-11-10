@@ -1,21 +1,30 @@
+// $table-border-color is the colour Odoo itself uses for table separators
+// (web/static/src/scss/bootstrap_overridden.scss). web.assets_web_dark
+// re-includes this bundle with the dark palette, so dark mode needs no
+// separate stylesheet.
 .o_list_renderer .o_list_table {
-    th {
+    // Scoped to <thead>: a grouped list also puts <th> inside <tbody>, on the
+    // group header rows, and those are not meant to carry column rules.
+    thead th {
         text-align: center !important;
-        border-left: 1px solid rgb(222, 226, 230) !important;
-        border-right: 1px solid rgb(222, 226, 230) !important;
+        border-left: 1px solid $table-border-color !important;
+        border-right: 1px solid $table-border-color !important;
+
+        &:first-child {
+            border-left: none !important;
+        }
+        &:last-child {
+            border-right: none !important;
+        }
     }
-    th:last-child {
-        border-right: none !important;
-    }
-    th:first-child {
-        border-left: none !important;
-    }
+    // Numeric headers carry o_list_number_th on the label <span>, which Odoo
+    // right-aligns.
     thead .o_list_number_th {
         text-align: center !important;
     }
     tr.o_data_row td {
-        border-left: 1px solid rgb(222, 226, 230);
-        border-right: 1px solid rgb(222, 226, 230);
+        border-left: 1px solid $table-border-color;
+        border-right: 1px solid $table-border-color;
     }
     tr {
         td:last-child {
@@ -29,9 +38,9 @@
 
 .o_form_sheet {
     .o_notebook_headers .nav-tabs .nav-link.active {
-        border-bottom: 1px solid rgb(222, 226, 230) !important;
+        border-bottom: 1px solid $table-border-color !important;
     }
     .o_inner_group .o_list_table thead th {
-        border-top: 1px solid rgb(222, 226, 230) !important;
+        border-top: 1px solid $table-border-color !important;
     }
 }

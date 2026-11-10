@@ -2,11 +2,20 @@
 <templates xml:space="preserve">
 
     <t t-inherit="web.SearchBarMenu" t-inherit-mode="extension">
-        <xpath expr="//t[@t-if='filterItems.length']" position="attributes">
-            <attribute name="t-if">filterItems.length and !hideCustomFilter</attribute>
+        <xpath expr="//t[@t-if='this.filterItems.length']" position="attributes">
+            <attribute name="t-if">this.filterItems.length and !this.hideCustomFilter</attribute>
         </xpath>
-        <xpath expr="//DropdownItem" position="attributes">
-            <attribute name="t-if">!hideCustomFilter</attribute>
+        <!-- Scoped to the filter column: the first `//DropdownItem` of the
+             template is the "More..." of a filter's options, and the second the
+             "Custom Date..." of a date filter. Only the one hanging directly
+             off the filter menu is "Custom Filter...". -->
+        <xpath expr="//div[hasclass('o_filter_menu')]/DropdownItem" position="attributes">
+            <attribute name="t-if">!this.hideCustomFilter</attribute>
+        </xpath>
+        <!-- "Custom Date..." opens the same domain editor as "Custom Filter...",
+             prefilled with a date condition. -->
+        <xpath expr="//DropdownItem[@t-if=&quot;item.type === 'dateFilter'&quot;]" position="attributes">
+            <attribute name="t-if">item.type === 'dateFilter' and !this.hideCustomFilter</attribute>
         </xpath>
     </t>
 

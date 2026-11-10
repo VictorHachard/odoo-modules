@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="import_export_records.ListView.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary">
+        <xpath expr="." position="inside">
+            <button t-if="!this.editedRecord" type="button" class="btn btn-secondary o_ier_import_button" t-on-click="this.onImportClick">
+                Import
+            </button>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_ier_template,ier_template,ier.template,base.group_system,crud,
+access_ier_template_line,ier_template_line,ier.template.line,base.group_system,crud,
+access_ier_template_action_history,ier_template_action_history,ier.template.action.history,base.group_system,cr,
+access_ier_export_wizard,ier_export_wizard,ier.export.wizard,base.group_system,crud,
+access_ier_import_wizard,ier_import_wizard,ier.import.wizard,base.group_system,crud,

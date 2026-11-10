@@ -2,25 +2,32 @@
 <html>
     <body>
         <br>
-        <p>Enhanced Security Search is a module that allows to manage access to custom filters, custom group by, and shared favorites in Odoo through user group assignments.
+        <p>Enhanced Security Search lets you decide who may build their own searches in Odoo. Users outside the "Enable Custom Search" group keep the predefined filters, group-bys and favorites, without the controls that let them write arbitrary domains or save new favorites.</p>
 
         <h2>Key Features:</h2>
         <ul>
-            <li>Allows to manage access to custom filters and custom group by.</li>
-            <li>Allows to manage access to shared favorites.</li>
+            <li>Hides "Custom Filter..." and "Custom Date..." in the search panel, and "Custom Filter..." in the search autocomplete.</li>
+            <li>Hides "Add Custom Group" in the search panel and in the pivot view header.</li>
+            <li>Disables the domain editor that opens when a filter facet is clicked (the group-by sort toggle keeps working).</li>
+            <li>Hides "Save current search" in the Favorites, and refuses on the server the creation, modification and deletion of favorites (ir.filters) outside the group.</li>
+            <li>Protects shared favorites: a favorite shared with other users can only be changed or deleted by its author or an administrator.</li>
+            <li>Every internal user holds the group by default (existing users at install, new users afterwards): remove it from the users who should only use the predefined searches.</li>
         </ul>
+
+        <h4>Scope:</h4>
+        <p>This module simplifies the search interface; it is not an access control over data. Record rules and access rights remain the only protection of the records themselves.</p>
 
         <h2>Screenshots:</h2>
         <div class="my-2">
             <img src="print_security.png" alt="Security View Screenshot" style="width: 100%;">
         </div>
 
-        <p>Security Enabled:</p>
+        <p>Custom search enabled:</p>
         <div class="my-2">
             <img src="print_enable_search.png" alt="Enable Search Screenshot" style="width: 50%;">
         </div>
 
-        <p>Security Disabled:</p>
+        <p>Custom search disabled:</p>
         <div class="my-2">
             <img src="print_disable_search.png" alt="Disable Search Screenshot" style="width: 50%;">
         </div>
@@ -30,5 +37,11 @@
 
         <h4>Issue:</h4>
         <p>If you encounter any issues, please visit the <a href="https://github.com/VictorHachard/odoo-modules/issues" target="_blank">GitHub repository issue section</a> @ github.com/VictorHachard/odoo-modules/issues</p>
+            <!-- hvg-support -->
+        <h4>Support:</h4>
+        <p>Developed and maintained by <a href="https://hvg-solutions.com" target="_blank">HVG Solutions</a>.
+            For help, a custom development or an Odoo project, contact us at
+            <a href="mailto:contact@hvg-solutions.com">contact@hvg-solutions.com</a>.</p>
+
     </body>
 </html>

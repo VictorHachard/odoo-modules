@@ -2,76 +2,85 @@
 
 from collections import defaultdict
 
-from odoo import api, models, fields, _
-from odoo.api import NewId
+from odoo import models
+
+from odoo.addons.stock_flowchart.tools import mermaid_click, mermaid_label, mermaid_node_id
+
+
+def _key(record):
+    """Identity of a record that is the same for a record and its onchange copy."""
+    return record._origin.id or record.id
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    def _get_flowchart_sub_graph(self, i18n=None, menu_id=None):
+    def _get_flowchart_node_id(self):
+        return mermaid_node_id('sp', self)
+
+    def _get_flowchart_sub_graph(self, i18n=None):
+        """Subgraph of the backorder chain of this picking.
+
+        It holds the backorder ancestors of the picking and its whole tree of
+        backorders, every branch included.
+        """
         self.ensure_one()
         if not i18n:
-            i18n = dict(self.env['stock.picking'].fields_get(allfields=['state'])['state']['selection'])
-        if not menu_id:
-            menu_id = self.env.ref('stock.menu_stock_root').id
-        click_done = []
-        flowchart = [f'subgraph sub{self.id} [" "]', 'direction LR']
-        # Add all backorder parent recursively
-        backorder = self
-        while backorder.backorder_id:
-            flowchart.append(f'{backorder.backorder_id._get_flowchart_element(i18n)} --> {backorder._get_flowchart_element(i18n)}')
-            if backorder.backorder_id.id not in click_done:
-                flowchart.append(backorder.backorder_id._get_flowchart_click(menu_id))
-                click_done.append(backorder.backorder_id.id)
-            if backorder.id not in click_done:
-                flowchart.append(backorder._get_flowchart_click(menu_id))
-                click_done.append(backorder.id)
-            backorder = backorder.backorder_id
-        # Add all backorder child recursively
-        backorder = self
-        while backorder.backorder_ids:
-            for back in backorder.backorder_ids:
-                flowchart.append(f'{backorder._get_flowchart_element(i18n)} --> {back._get_flowchart_element(i18n)}')
-                if backorder.id not in click_done:
-                    flowchart.append(backorder._get_flowchart_click(menu_id))
-                    click_done.append(backorder.id)
-                if back.id not in click_done:
-                    flowchart.append(back._get_flowchart_click(menu_id))
-                    click_done.append(back.id)
-                backorder = back
+            i18n = self._get_flowchart_i18n()
+        nodes = self.browse()
+        edges = []
+        child, parent = self, self.backorder_id
+        while parent and parent not in nodes:
+            edges.insert(0, (parent, child))
+            nodes |= parent
+            child, parent = parent, parent.backorder_id
+        nodes |= self
+        stack = [self]
+        while stack:
+            picking = stack.pop()
+            for backorder in picking.backorder_ids:
+                if backorder in nodes:
+                    continue
+                edges.append((picking, backorder))
+                nodes |= backorder
+                stack.append(backorder)
+
+        flowchart = [f'subgraph sub{self._get_flowchart_node_id()} [" "]', 'direction LR']
+        flowchart += [picking._get_flowchart_element(i18n) for picking in nodes]
+        flowchart += [
+            f'{parent._get_flowchart_node_id()} --> {child._get_flowchart_node_id()}'
+            for parent, child in edges
+        ]
         flowchart.append('end')
+        flowchart += [click for click in (picking._get_flowchart_click() for picking in nodes) if click]
         return '\n'.join(flowchart)
 
     def _get_picking_hierarchy(self):
-        parent_dict = defaultdict(list)
+        """Group the pickings of ``self`` by backorder chain.
 
-        # Creating a dictionary with parent picking as key and list of child pickings as value
+        Return one list per chain: its first picking, then its backorders, depth
+        first. A picking whose backorder parent is not in ``self`` starts a chain
+        of its own, so that no picking of ``self`` is left out.
+        """
+        keys = {_key(picking) for picking in self}
+        children = defaultdict(list)
+        roots = []
         for picking in self:
-            if picking.backorder_id:
-                _id = picking.backorder_id._origin.id if isinstance(picking.backorder_id.id, NewId) else picking.backorder_id.id
-                parent_dict[_id].append(picking)
+            parent = picking.backorder_id
+            if parent and _key(parent) in keys and _key(parent) != _key(picking):
+                children[_key(parent)].append(picking)
+            else:
+                roots.append(picking)
 
-        # Function to recursively get all child pickings
-        def get_children(parent_id):
-            children = parent_dict.get(parent_id, [])
-            all_children = []
-            for child in children:
-                _id = child._origin.id if isinstance(child.id, NewId) else child.id
-                all_children.append(child)
-                all_children.extend(get_children(_id))
-            return all_children
+        def walk(picking, seen):
+            seen.add(_key(picking))
+            result = [picking]
+            for child in children[_key(picking)]:
+                if _key(child) not in seen:
+                    result += walk(child, seen)
+            return result
 
-        # Generate the final list of lists
-        picking_hierarchy = []
-        for picking in self:
-            if not picking.backorder_id:  # Only start with parent pickings
-                _id = picking._origin.id if isinstance(picking.id, NewId) else picking.id
-                hierarchy = [picking]
-                hierarchy.extend(get_children(_id))
-                picking_hierarchy.append(hierarchy)
-
-        return picking_hierarchy
+        return [walk(root, set()) for root in roots]
 
     def _get_flowchart_state_color(self):
         return {
@@ -90,12 +99,10 @@ class StockPicking(models.Model):
         self.ensure_one()
         if not i18n:
             i18n = self._get_flowchart_i18n()
-        state = self._get_flowchart_state_color().get(self.state)
-        return f'sp{self.id}({self.name} - {_(i18n[self.state])}):::{state}'
+        state_class = self._get_flowchart_state_color().get(self.state, 'bg-grey-light')
+        label = mermaid_label(f"{self.name or '/'} - {i18n.get(self.state, self.state or '')}")
+        return f'{self._get_flowchart_node_id()}({label}):::{state_class}'
 
-    def _get_flowchart_click(self, menu_id=None):
+    def _get_flowchart_click(self):
         self.ensure_one()
-        if not menu_id:
-            menu_id = self.env.ref('stock.menu_stock_root').id
-        _id = self._origin.id if isinstance(self.id, NewId) else self.id
-        return f'click sp{self.id} "/web#id={_id}&model=stock.picking&view_type=form&menu_id={menu_id}" _blank'
+        return mermaid_click('sp', self)
