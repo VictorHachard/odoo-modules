@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- These widget templates are intended for read-only mode only -->
+
+    <t t-name="cron_type_widget">
+        <span>
+            <span class="oi" data-icon="flash_on" t-if="this.value === 'automatic'" t-att-data-tooltip="this.getTypeTitle"/>
+            <span class="oi" data-icon="person" t-if="this.value === 'manual'" t-att-data-tooltip="this.getTypeTitle"/>
+        </span>
+    </t>
+
+</templates>

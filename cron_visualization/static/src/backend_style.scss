@@ -1,0 +1,5 @@
+// Center the type icon in its list column (width is set via the field's
+// `width` attribute in the list view).
+tr.o_data_row td:has(> div.o_field_cron_type_widget) {
+    text-align: center;
+}

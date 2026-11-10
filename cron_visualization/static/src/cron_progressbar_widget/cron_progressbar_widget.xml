@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- These widget templates are intended for read-only mode only -->
+
+    <t t-name="cron_progressbar_widget">
+        <span class="d-block">
+            <t t-if="this.getProgressBar.length">
+                <t t-foreach="this.getProgressBar" t-as="progress" t-key="progress.index">
+                    <div class="d-flex align-items-center o_cron_progress">
+                        <span class="me-2 oi text-center flex-shrink-0" data-icon="flash_on" t-if="progress.type == 'automatic'" style="width: 12px;"/>
+                        <span class="me-2 oi text-center flex-shrink-0" data-icon="person" t-if="progress.type == 'manual'" style="width: 12px;"/>
+                        <div class="progress flex-grow-1">
+                            <!-- Known estimate: a percentage. No estimate yet
+                                 (first run, or no successful run to compare
+                                 with): a full striped bar and no number. -->
+                            <div t-if="progress.known" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" t-att-aria-valuenow="progress.progress" aria-valuemin="0" aria-valuemax="100" t-att-style="'width: min(' + progress.progress + '%, 100%)'">
+                                <t t-out="progress.progress + '%'"/>
+                            </div>
+                            <div t-else="" class="progress-bar progress-bar-striped progress-bar-animated o_cron_progress_unknown opacity-50" role="progressbar" aria-label="Running" style="width: 100%"/>
+                        </div>
+                        <span class="ms-2 text-nowrap flex-shrink-0" t-out="progress.duration"/>
+                    </div>
+                </t>
+            </t>
+            <t t-else="">
+                <!-- Idle placeholder: keeps the row height stable so the layout
+                     does not jump when a real progress bar appears. -->
+                <div class="d-flex align-items-center opacity-50">
+                    <span class="me-2 flex-shrink-0" style="width: 12px;"/>
+                    <div class="progress flex-grow-1"/>
+                </div>
+            </t>
+        </span>
+    </t>
+
+</templates>
