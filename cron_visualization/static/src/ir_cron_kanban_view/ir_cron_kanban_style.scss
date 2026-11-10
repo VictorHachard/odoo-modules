@@ -1,0 +1,21 @@
+.ir_cron_kanban_style {
+    // Force one full-width card per row. In v19 the ungrouped kanban sizes
+    // records with `width: var(--KanbanRecord-width)` (a fixed ~300px), so
+    // overriding the variable is what actually makes the cards span the row.
+    --KanbanRecord-width: 100%;
+    align-content: flex-start;
+
+    .o_kanban_record {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 0.25rem 0 !important;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+    }
+
+    // Field widgets render a block-level <div>; keep the "Next Execution" and
+    // "Repeat Every" lines flowing inline instead of breaking onto new rows.
+    .o_kanban_record_bottom .o_field_widget {
+        display: inline-block;
+    }
+}

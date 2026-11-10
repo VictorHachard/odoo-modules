@@ -1,0 +1,328 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cron_visualization
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-23 07:35+0000\n"
+"PO-Revision-Date: 2026-10-23 07:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_cv_ir_cron_history__state
+msgid ""
+"  * Success: The cron finished successfully.\n"
+"  * Failed: The cron finished with an error.\n"
+"  * Interruption: The cron was interrupted (server restart, ...).\n"
+"  * Running: The cron is currently running."
+msgstr ""
+"  * Erfolg: Der Cron wurde erfolgreich beendet.\n"
+"  * Fehlgeschlagen: Der Cron endete mit einem Fehler.\n"
+"  * Unterbrechung: Der Cron wurde unterbrochen (Serverneustart, ...).\n"
+"  * Läuft: Der Cron läuft gerade."
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_form
+msgid "<i class=\"oi oi-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" invisible=\"ended_at == False\"/>"
+msgstr "<i class=\"oi oi-arrow-right mx-2 oe_read_only\" aria-label=\"Pfeilsymbol\" title=\"Pfeil\" invisible=\"ended_at == False\"/>"
+
+#. module: cron_visualization
+#. odoo-python
+#: code:addons/cron_visualization/model/ir_cron.py:0
+msgid "<p class=\"o_view_nocontent_smiling_face\">No history found!</p>"
+msgstr "<p class=\"o_view_nocontent_smiling_face\">Kein Verlauf gefunden!</p>"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/cron_type_widget/cron_type_widget.js:0 model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__type__automatic model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Automatic"
+msgstr "Automatisch"
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_tree
+msgid "Average"
+msgstr "Durchschnitt"
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_graph model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_pivot
+msgid "Average Duration (minutes)"
+msgstr "Durchschnittliche Dauer (Minuten)"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__ir_cron_id
+msgid "Cron"
+msgstr "Cron"
+
+#. module: cron_visualization
+#. odoo-python
+#: code:addons/cron_visualization/model/ir_cron.py:0 model:ir.model,name:cron_visualization.model_cv_ir_cron_history model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_ir_cron_history_ids
+msgid "Cron History"
+msgstr "Cron-Verlauf"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_ir_cron__cv_progress_estimated
+msgid "Current progress of the cron (progress;duration;type)"
+msgstr "Aktueller Fortschritt des Crons (Fortschritt;Dauer;Typ)"
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_form model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Date"
+msgstr "Datum"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__display_name model:ir.model.fields,field_description:cron_visualization.field_ir_cron__display_name model:ir.model.fields,field_description:cron_visualization.field_ir_websocket__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__duration
+msgid "Duration (minutes)"
+msgstr "Dauer (Minuten)"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_cv_ir_cron_history__duration
+msgid "Duration in minutes"
+msgstr "Dauer in Minuten"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__ended_at
+msgid "Ended At"
+msgstr "Beendet um"
+
+#. module: cron_visualization
+#: model:ir.module.module,shortdesc:base.module_cron_visualization
+msgid "Enhanced Cron Visualization"
+msgstr "Erweiterte Cron-Visualisierung"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__error model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_form
+msgid "Error"
+msgstr "Fehler"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_cv_ir_cron_history__error
+msgid "Error message if the cron failed."
+msgstr "Fehlermeldung, wenn der Cron fehlgeschlagen ist."
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Fail"
+msgstr "Fehlgeschlagen"
+
+#. module: cron_visualization
+#: model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__state__fail
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+#. module: cron_visualization
+#: model:ir.actions.act_window,name:cron_visualization.cv_ir_cron_history_action model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_history model_terms:ir.ui.view,arch_db:cron_visualization.ir_cron_view_form_inherit
+msgid "History"
+msgstr "Historie"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_history_count
+msgid "History Count"
+msgstr "Anzahl Verlaufseinträge"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_ir_cron__cv_history
+msgid "History of the last 10 runs (state;duration)"
+msgstr "Verlauf der letzten 10 Ausführungen (Status;Dauer)"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__id model:ir.model.fields,field_description:cron_visualization.field_ir_cron__id model:ir.model.fields,field_description:cron_visualization.field_ir_websocket__id
+msgid "ID"
+msgstr "ID"
+
+#. module: cron_visualization
+#: model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__state__interruption model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Interruption"
+msgstr "Unterbrechung"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_is_running
+msgid "Is Running"
+msgstr "Läuft"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_ir_cron__cv_is_running
+msgid "Is the cron currently running"
+msgstr "Läuft der Cron gerade"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/cron_type_widget/cron_type_widget.js:0 model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__type__manual model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Manual"
+msgstr "Manuell"
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_tree
+msgid "Name"
+msgstr "Name"
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_kanban_view
+msgid "Next Execution Date:"
+msgstr "Datum der nächsten Ausführung:"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_next_execution_timer
+msgid "Next Execution Timer"
+msgstr "Countdown bis zur nächsten Ausführung"
+
+#. module: cron_visualization
+#: model_terms:ir.actions.act_window,help:cron_visualization.cv_ir_cron_history_action
+msgid "No history found!"
+msgstr "Kein Verlauf gefunden!"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_ir_cron__cv_progress_estimated
+msgid "Progress Estimated"
+msgstr "Geschätzter Fortschritt"
+
+#. module: cron_visualization
+#: model:ir.module.module,summary:base.module_cron_visualization
+msgid "Real-time kanban dashboard to monitor the cron jobs running in your Odoo instance."
+msgstr "Kanban-Dashboard in Echtzeit zur Überwachung der Cron-Jobs Ihrer Odoo-Instanz."
+
+#. module: cron_visualization
+#: model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_kanban_view
+msgid "Repeat Every:"
+msgstr "Wiederholen alle:"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/cron_progressbar_widget/cron_progressbar_widget.xml:0 code:addons/cron_visualization/static/src/spinner_widget/spinner_widget.js:0 model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__state__running model_terms:ir.ui.view,arch_db:cron_visualization.ir_cron_view_search_inherit
+msgid "Running"
+msgstr "Laufend"
+
+#. module: cron_visualization
+#: model:ir.model,name:cron_visualization.model_ir_cron
+msgid "Scheduled Action"
+msgstr "Geplante Aktion"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__started_at
+msgid "Started At"
+msgstr "Gestartet um"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__state model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "State"
+msgstr "Status"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/spinner_widget/spinner_widget.js:0
+msgid "Stopped"
+msgstr "Angehalten"
+
+#. module: cron_visualization
+#: model:ir.model.fields.selection,name:cron_visualization.selection__cv_ir_cron_history__state__success model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Success"
+msgstr "Erfolgreich"
+
+#. module: cron_visualization
+#: model:ir.model.fields,help:cron_visualization.field_ir_cron__cv_next_execution_timer
+msgid "Time remaining before the next execution"
+msgstr "Verbleibende Zeit bis zur nächsten Ausführung"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__type model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "Type"
+msgstr "Typ"
+
+#. module: cron_visualization
+#: model:ir.model.fields,field_description:cron_visualization.field_cv_ir_cron_history__user_id model_terms:ir.ui.view,arch_db:cron_visualization.cv_ir_cron_history_view_search
+msgid "User"
+msgstr "Benutzer"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/utils/format.js:0
+msgid "day"
+msgstr "Tag"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/utils/format.js:0
+msgid "days"
+msgstr "Tage"
+
+#. module: cron_visualization
+#: model:ir.model,name:cron_visualization.model_ir_websocket
+msgid "websocket message handling"
+msgstr "Websocket-Nachrichtbearbeitung"
+
+#. module: cron_visualization
+#: model:ir.module.module,description:base.module_cron_visualization
+msgid ""
+"\n"
+"Enhanced Cron Visualization\n"
+"===========================\n"
+"\n"
+"Visualize and monitor the scheduled actions (cron jobs) running in your Odoo\n"
+"instance from a live kanban dashboard.\n"
+"\n"
+"* Real-time updates pushed through the bus (no polling, no periodic refresh),\n"
+"  delivered to Settings users only.\n"
+"* Per-cron run history with state, duration, type (manual / automatic),\n"
+"  operator and error message.\n"
+"* Running indicator, estimated progress bar and next-execution countdown.\n"
+"* List, pivot, graph and calendar analysis of the run history.\n"
+"* Runs left behind by a killed worker are detected and flagged as interrupted.\n"
+"* Automatic cleanup of the history (90 days by default, configurable through\n"
+"  the ``cron_visualization.history_retention_days`` system parameter).\n"
+msgstr ""
+"\n"
+"Erweiterte Cron-Visualisierung\n"
+"==============================\n"
+"\n"
+"Visualisieren und überwachen Sie die geplanten Aktionen (Cron-Jobs) Ihrer\n"
+"Odoo-Instanz in einem Live-Kanban-Dashboard.\n"
+"\n"
+"* Echtzeit-Aktualisierungen über den Bus (kein Polling, keine periodische\n"
+"  Aktualisierung), nur für Benutzer mit Einstellungsrechten.\n"
+"* Ausführungsverlauf je Cron mit Status, Dauer, Typ (manuell / automatisch),\n"
+"  Bediener und Fehlermeldung.\n"
+"* Laufanzeige, geschätzter Fortschrittsbalken und Countdown bis zur nächsten\n"
+"  Ausführung.\n"
+"* Analyse des Verlaufs in Listen-, Pivot-, Grafik- und Kalenderansicht.\n"
+"* Ausführungen eines beendeten Workers werden erkannt und als unterbrochen\n"
+"  markiert.\n"
+"* Automatische Bereinigung des Verlaufs (standardmäßig 90 Tage, einstellbar über\n"
+"  den Systemparameter ``cron_visualization.history_retention_days``).\n"
+
+#. module: cron_visualization
+#. odoo-javascript
+#: code:addons/cron_visualization/static/src/utils/format.js:0
+msgid "and"
+msgstr "und"
